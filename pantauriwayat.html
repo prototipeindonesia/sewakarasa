@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Riwayat Emosi - Sewaka Rasa</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        :root {
+            --primary: #4A90E2;
+            --secondary: #E3F2FD;
+            --accent: #6FCF97;
+            --warning: #F2C94C;
+            --danger: #EB5757;
+            --text-dark: #2D3436;
+            --text-light: #636E72;
+            --bg: #F0F7FF;
+            --white: #FFFFFF;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text-dark);
+            max-width: 480px;
+            margin: 0 auto;
+            min-height: 100vh;
+            padding-bottom: 100px;
+        }
+
+        /* Header */
+        header {
+            padding: 25px 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            background: var(--white);
+            border-bottom-left-radius: 25px;
+            border-bottom-right-radius: 25px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+        }
+
+        .back-btn {
+            background: var(--secondary);
+            border: none;
+            padding: 8px;
+            border-radius: 12px;
+            color: var(--primary);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+        }
+
+        header h1 {
+            font-size: 1.1rem;
+            font-weight: 700;
+        }
+
+        .container {
+            padding: 20px;
+        }
+
+        /* Selector Waktu */
+        .time-selector {
+            display: flex;
+            background: #E0EBF7;
+            padding: 5px;
+            border-radius: 15px;
+            margin-bottom: 25px;
+        }
+
+        .time-btn {
+            flex: 1;
+            padding: 10px;
+            border: none;
+            background: transparent;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--text-light);
+            cursor: pointer;
+            border-radius: 12px;
+        }
+
+        .time-btn.active {
+            background: var(--white);
+            color: var(--primary);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        }
+
+        /* Grafik Card */
+        .chart-card {
+            background: var(--white);
+            border-radius: 24px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 10px 25px rgba(74, 144, 226, 0.08);
+        }
+
+        .chart-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+        .chart-header h2 { font-size: 0.9rem; color: var(--text-light); }
+
+        .visual-chart {
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-between;
+            height: 150px;
+            padding: 10px 0;
+            border-bottom: 2px solid var(--secondary);
+        }
+
+        .bar-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            flex: 1;
+        }
+
+        .bar {
+            width: 12px;
+            background: var(--secondary);
+            border-radius: 10px;
+            transition: 0.5s ease;
+        }
+
+        .bar.high { background: var(--accent); }
+        .bar.mid { background: var(--warning); }
+        .bar.low { background: var(--danger); }
+
+        .day-label { font-size: 0.65rem; color: var(--text-light); font-weight: 600; }
+
+        /* Detail List */
+        .history-list h3 {
+            font-size: 0.95rem;
+            margin-bottom: 15px;
+            color: var(--text-dark);
+        }
+
+        .history-item {
+            background: var(--white);
+            padding: 15px;
+            border-radius: 18px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 12px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.02);
+        }
+
+        .item-emoji {
+            font-size: 1.5rem;
+            width: 45px;
+            height: 45px;
+            background: var(--bg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 12px;
+        }
+
+        .item-info { flex: 1; }
+        .item-info h4 { font-size: 0.85rem; font-weight: 600; }
+        .item-info p { font-size: 0.75rem; color: var(--text-light); margin-top: 2px; }
+
+        .item-time { font-size: 0.7rem; color: var(--text-light); }
+
+        /* Navigation Bawah */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            max-width: 480px;
+            background: var(--white);
+            display: flex;
+            justify-content: space-around;
+            padding: 15px 10px 25px;
+            border-radius: 25px 25px 0 0;
+            box-shadow: 0 -10px 30px rgba(0,0,0,0.05);
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: #B2BEC3;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-size: 0.65rem;
+            font-weight: 500;
+            gap: 5px;
+        }
+
+        .nav-link.active { color: var(--primary); }
+    </style>
+</head>
+<body>
+
+    <header>
+        <a href="index.html" class="back-btn">
+            <i data-lucide="chevron-left"></i>
+        </a>
+        <h1>Riwayat Emosi</h1>
+    </header>
+
+    <div class="container">
+        <div class="time-selector">
+            <button class="time-btn active">Minggu</button>
+            <button class="time-btn">Bulan</button>
+            <button class="time-btn">3 Bulan</button>
+        </div>
+
+        <section class="chart-card">
+            <div class="chart-header">
+                <h2>Tren Mingguan</h2>
+                <span style="font-size: 0.75rem; color: var(--accent); font-weight: 600;">Stabil</span>
+            </div>
+            <div class="visual-chart">
+                <div class="bar-container">
+                    <div class="bar high" style="height: 80%;"></div>
+                    <span class="day-label">Sen</span>
+                </div>
+                <div class="bar-container">
+                    <div class="bar mid" style="height: 50%;"></div>
+                    <span class="day-label">Sel</span>
+                </div>
+                <div class="bar-container">
+                    <div class="bar high" style="height: 70%;"></div>
+                    <span class="day-label">Rab</span>
+                </div>
+                <div class="bar-container">
+                    <div class="bar low" style="height: 30%;"></div>
+                    <span class="day-label">Kam</span>
+                </div>
+                <div class="bar-container">
+                    <div class="bar mid" style="height: 60%;"></div>
+                    <span class="day-label">Jum</span>
+                </div>
+                <div class="bar-container">
+                    <div class="bar high" style="height: 90%;"></div>
+                    <span class="day-label">Sab</span>
+                </div>
+                <div class="bar-container">
+                    <div class="bar high" style="height: 85%;"></div>
+                    <span class="day-label">Min</span>
+                </div>
+            </div>
+        </section>
+
+        <section class="history-list">
+            <h3>Aktivitas Terbaru</h3>
+            
+            <div class="history-item">
+                <div class="item-emoji">😊</div>
+                <div class="item-info">
+                    <h4>Senang</h4>
+                    <p>"Tugas sekolah selesai lebih cepat."</p>
+                </div>
+                <div class="item-time">Hari ini</div>
+            </div>
+
+            <div class="history-item">
+                <div class="item-emoji">😔</div>
+                <div class="item-info">
+                    <h4>Sedih</h4>
+                    <p>"Merasa lelah dengan ekspektasi."</p>
+                </div>
+                <div class="item-time">Kemarin</div>
+            </div>
+
+            <div class="history-item">
+                <div class="item-emoji">😐</div>
+                <div class="item-info">
+                    <h4>Biasa Saja</h4>
+                    <p>Tidak ada catatan.</p>
+                </div>
+                <div class="item-time">8 Mei</div>
+            </div>
+        </section>
+    </div>
+
+    <nav class="bottom-nav">
+        <a href="index.html" class="nav-link">
+            <i data-lucide="home"></i>
+            <span>Beranda</span>
+        </a>
+        <a href="curhat.html" class="nav-link">
+            <i data-lucide="message-circle"></i>
+            <span>Curhat</span>
+        </a>
+        <a href="pantauriwayat.html" class="nav-link active">
+            <i data-lucide="history"></i>
+            <span>Riwayat</span>
+        </a>
+        <a href="profil.html" class="nav-link">
+            <i data-lucide="user"></i>
+            <span>Profil</span>
+        </a>
+    </nav>
+
+    <script>
+        lucide.createIcons();
+
+        // Simple Toggle untuk Tab Selector
+        const buttons = document.querySelectorAll('.time-btn');
+        buttons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                buttons.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+            });
+        });
+    </script>
+</body>
+</html>

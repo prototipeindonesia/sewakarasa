@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel Guru BK - Sewaka Rasa</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        :root {
+            --primary: #1E3A8A;
+            --accent: #F59E0B;
+            --success: #10B981;
+            --danger: #EF4444;
+            --bg: #F8FAFC;
+            --white: #FFFFFF;
+            --text-dark: #1E293B;
+            --text-light: #64748B;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text-dark);
+            max-width: 480px;
+            margin: 0 auto;
+            min-height: 100vh;
+            /* Tambahkan padding bawah yang cukup besar agar tidak tertutup menu melayang */
+            padding-bottom: 120px; 
+        }
+
+        header {
+            padding: 30px 20px;
+            background: var(--white);
+            border-bottom: 1px solid #E2E8F0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        header h1 { font-size: 1.1rem; font-weight: 700; color: var(--primary); }
+        .admin-profile { display: flex; align-items: center; gap: 10px; }
+        .admin-avatar { width: 35px; height: 35px; border-radius: 10px; background: #DBEAFE; color: var(--primary); display: flex; align-items: center; justify-content: center; }
+
+        .container { padding: 20px; }
+
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .stat-box {
+            background: var(--white);
+            padding: 20px;
+            border-radius: 20px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        }
+
+        .stat-box h3 { font-size: 1.5rem; margin-bottom: 5px; color: var(--text-dark); }
+        .stat-box p { font-size: 0.75rem; color: var(--text-light); font-weight: 600; }
+        .stat-box .trend { font-size: 0.65rem; font-weight: 700; margin-top: 10px; display: flex; align-items: center; gap: 4px; }
+        .trend.up { color: var(--danger); }
+        .trend.down { color: var(--success); }
+
+        /* Urgent Alerts */
+        .section-title {
+            font-size: 0.9rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 10px;
+        }
+
+        .alert-card {
+            background: #FEF2F2;
+            border-left: 4px solid var(--danger);
+            padding: 15px;
+            border-radius: 15px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 10px rgba(239, 68, 68, 0.05);
+        }
+
+        .alert-card h4 { font-size: 0.85rem; color: #991B1B; margin-bottom: 5px; }
+        .alert-card p { font-size: 0.75rem; color: #B91C1C; margin-bottom: 12px; line-height: 1.4; }
+        
+        .btn-action {
+            background: var(--danger);
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 10px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .btn-action:active { transform: scale(0.95); }
+
+        /* Recent Activity */
+        .activity-card {
+            background: var(--white);
+            border-radius: 20px;
+            padding: 5px 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.02);
+        }
+
+        .activity-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+            padding: 15px 0;
+            border-bottom: 1px solid #F1F5F9;
+        }
+
+        .activity-item:last-child { border-bottom: none; }
+
+        .mood-indicator {
+            width: 12px;
+            height: 12px;
+            border-radius: 4px;
+            margin-top: 4px;
+        }
+
+        .act-info { flex: 1; }
+        .act-info h5 { font-size: 0.85rem; margin-bottom: 4px; font-weight: 600; }
+        .act-info p { font-size: 0.75rem; color: var(--text-light); line-height: 1.3; }
+        .time { font-size: 0.65rem; color: #B2BEC3; font-weight: 500; }
+
+        /* Floating Menu Fix */
+        .floating-menu {
+            position: fixed;
+            bottom: 25px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 90%;
+            max-width: 420px;
+            background: var(--primary);
+            padding: 12px 10px;
+            border-radius: 24px;
+            display: flex;
+            justify-content: space-around;
+            box-shadow: 0 15px 35px rgba(30, 58, 138, 0.4);
+            z-index: 100;
+        }
+
+        .f-item { 
+            color: rgba(255,255,255,0.5); 
+            text-decoration: none; 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            gap: 4px; 
+            font-size: 0.65rem; 
+            font-weight: 500;
+            transition: 0.3s;
+        }
+
+        .f-item.active { color: white; }
+        .f-item i { margin-bottom: 2px; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Panel Guru BK</h1>
+        <div class="admin-profile">
+            <div class="time" id="current-date">-- Mei 2026</div>
+            <div class="admin-avatar">
+                <i data-lucide="user-check" size="20"></i>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="stats-grid">
+            <div class="stat-box">
+                <p>Laporan Baru</p>
+                <h3>03</h3>
+                <span class="trend up"><i data-lucide="trending-up" size="12"></i> +2 hari ini</span>
+            </div>
+            <div class="stat-box">
+                <p>Siswa Curhat</p>
+                <h3>18</h3>
+                <span class="trend down"><i data-lucide="trending-down" size="12"></i> -5% minggu ini</span>
+            </div>
+        </div>
+
+        <div class="section-title">
+            <i data-lucide="alert-circle" color="var(--danger)" size="18"></i>
+            Tindakan Mendesak
+        </div>
+        <div class="alert-card">
+            <h4>Peringatan Perundungan</h4>
+            <p>Siswa (Anonim) melaporkan kejadian fisik di area belakang kantin sekitar 15 menit yang lalu. Perlu pengecekan lokasi segera.</p>
+            <button class="btn-action" onclick="alert('Lokasi diamankan. Menghubungi tim kesiswaan...')">Tangani Sekarang</button>
+        </div>
+
+        <div class="section-title">
+            <i data-lucide="clipboard-list" color="var(--primary)" size="18"></i>
+            Log Aktivitas Terbaru
+        </div>
+        <div class="activity-card">
+            <div class="activity-item">
+                <div class="mood-indicator" style="background: var(--danger);"></div>
+                <div class="act-info">
+                    <h5>Laporan Bullying Masuk</h5>
+                    <p>Kategori: Cyber Bullying (Grup WA) - Kelas X-B</p>
+                </div>
+                <div class="time">09:12</div>
+            </div>
+            <div class="activity-item">
+                <div class="mood-indicator" style="background: var(--accent);"></div>
+                <div class="act-info">
+                    <h5>Siswa Mengirim Curhatan</h5>
+                    <p>Kategori: Kecemasan Akademik & Ujian</p>
+                </div>
+                <div class="time">08:45</div>
+            </div>
+            <div class="activity-item">
+                <div class="mood-indicator" style="background: var(--success);"></div>
+                <div class="act-info">
+                    <h5>Konseling Selesai</h5>
+                    <p>Siswa: Kadek Wijaya (XI-IPA 1) - Status: Membaik</p>
+                </div>
+                <div class="time">Kemarin</div>
+            </div>
+            <div class="activity-item">
+                <div class="mood-indicator" style="background: var(--primary);"></div>
+                <div class="act-info">
+                    <h5>Edukasi Diperbarui</h5>
+                    <p>Modul "Cara Melapor" telah dibaca oleh 45 siswa.</p>
+                </div>
+                <div class="time">Kemarin</div>
+            </div>
+        </div>
+    </div>
+
+    <nav class="floating-menu">
+        <a href="dashboardbk.html" class="f-item active">
+            <i data-lucide="layout-grid" size="20"></i>
+            <span>Beranda</span>
+        </a>
+        <a href="laporanbk.html" class="f-item">
+            <i data-lucide="file-warning" size="20"></i>
+            <span>Laporan</span>
+        </a>
+        <a href="datasiswa.html" class="f-item">
+            <i data-lucide="users-2" size="20"></i>
+            <span>Siswa</span>
+        </a>
+        <a href="login.html" class="f-item">
+            <i data-lucide="log-out" size="20"></i>
+            <span>Keluar</span>
+        </a>
+    </nav>
+
+    <script>
+        lucide.createIcons();
+        
+        // Menampilkan tanggal hari ini secara otomatis
+        const d = new Date();
+        const options = { day: 'numeric', month: 'long', year: 'numeric' };
+        document.getElementById('current-date').innerText = d.toLocaleDateString('id-ID', options);
+    </script>
+</body>
+</html>

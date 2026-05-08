@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sewaka Rasa - Sahabat Mental Siswa</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        :root {
+            --primary: #4A90E2;      /* Biru tenang */
+            --secondary: #E3F2FD;    /* Biru sangat muda */
+            --accent: #6FCF97;       /* Hijau sukses/aman */
+            --danger: #EB5757;       /* Merah peringatan lembut */
+            --text-dark: #2D3436;
+            --text-light: #636E72;
+            --bg: #F0F7FF;           /* Background biru awan */
+            --white: #FFFFFF;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text-dark);
+            max-width: 480px; /* Limit untuk simulasi mobile di desktop */
+            margin: 0 auto;
+            min-height: 100vh;
+            padding-bottom: 100px; /* Jarak untuk navbar bawah */
+        }
+
+        /* Header */
+        header {
+            padding: 30px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .user-greeting h1 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .user-greeting p {
+            font-size: 0.85rem;
+            color: var(--text-light);
+            margin-top: 4px;
+        }
+
+        .notification-btn {
+            background: var(--white);
+            padding: 10px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            color: var(--text-light);
+            cursor: pointer;
+            border: none;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+
+        /* Container Card */
+        .container {
+            padding: 0 20px;
+        }
+
+        .card {
+            background: var(--white);
+            border-radius: 24px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 10px 25px rgba(74, 144, 226, 0.08);
+        }
+
+        .card-title {
+            font-size: 0.95rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        /* Emoji Check-in */
+        .emoji-row {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 10px;
+        }
+
+        .emoji-btn {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            border: none;
+            background: none;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .emoji-btn:hover { transform: translateY(-5px); }
+
+        .emoji-icon {
+            font-size: 1.8rem;
+            width: 55px;
+            height: 55px;
+            background: var(--secondary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 18px;
+            margin-bottom: 8px;
+        }
+
+        .emoji-btn span {
+            font-size: 0.7rem;
+            font-weight: 500;
+            color: var(--text-light);
+        }
+
+        /* Chart Simulation */
+        .chart-box {
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-between;
+            height: 80px;
+            margin: 15px 0;
+            padding: 0 10px;
+            cursor: pointer;
+        }
+
+        .chart-bar {
+            width: 30px;
+            background: var(--secondary);
+            border-radius: 8px;
+            transition: 0.5s ease;
+        }
+
+        .chart-bar.active {
+            background: var(--primary);
+        }
+
+        /* Feature Grid */
+        .grid-menu {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+
+        .menu-item {
+            background: var(--white);
+            padding: 20px;
+            border-radius: 20px;
+            text-decoration: none;
+            color: var(--text-dark);
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+            border: 1px solid rgba(0,0,0,0.02);
+            transition: transform 0.2s;
+        }
+
+        .menu-item:active { transform: scale(0.95); }
+
+        .menu-item i {
+            color: var(--primary);
+        }
+
+        .menu-item.emergency {
+            background: #FFF0F0;
+            border: 1px solid #FFDCDC;
+        }
+
+        .menu-item.emergency i {
+            color: var(--danger);
+        }
+
+        /* Anti-Bullying Banner */
+        .banner {
+            background: linear-gradient(135deg, var(--accent), #56ab2f);
+            color: white;
+            padding: 20px;
+            border-radius: 20px;
+            margin-top: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            text-decoration: none;
+        }
+
+        .banner-text h4 { font-size: 0.9rem; margin-bottom: 4px; }
+        .banner-text p { font-size: 0.75rem; opacity: 0.9; }
+
+        .banner-btn {
+            background: rgba(255,255,255,0.2);
+            border: 1px solid white;
+            color: white;
+            padding: 6px 12px;
+            border-radius: 10px;
+            font-size: 0.75rem;
+            pointer-events: none; /* Button mengikuti link banner */
+        }
+
+        /* Navigation */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            max-width: 480px;
+            background: var(--white);
+            display: flex;
+            justify-content: space-around;
+            padding: 15px 10px 25px;
+            border-radius: 25px 25px 0 0;
+            box-shadow: 0 -10px 30px rgba(0,0,0,0.05);
+            z-index: 100;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: #B2BEC3;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-size: 0.65rem;
+            font-weight: 500;
+            gap: 5px;
+            transition: 0.2s;
+        }
+
+        .nav-link.active {
+            color: var(--primary);
+        }
+
+        .nav-link i {
+            width: 24px;
+            height: 24px;
+        }
+
+        /* Utility */
+        .more { font-size: 0.75rem; color: var(--primary); text-decoration: none; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="user-greeting">
+            <h1>Halo, Kadek! 👋</h1>
+            <p>Ruang aman untuk ceritamu hari ini.</p>
+        </div>
+        <a href="notifikasi.html" class="notification-btn">
+            <i data-lucide="bell"></i>
+        </a>
+    </header>
+
+    <div class="container">
+        <section class="card">
+            <div class="card-title">Bagaimana perasaanmu?</div>
+            <div class="emoji-row">
+                <button class="emoji-btn" onclick="saveMood('Senang')">
+                    <div class="emoji-icon">😊</div>
+                    <span>Senang</span>
+                </button>
+                <button class="emoji-btn" onclick="saveMood('Biasa')">
+                    <div class="emoji-icon">😐</div>
+                    <span>Biasa</span>
+                </button>
+                <button class="emoji-btn" onclick="saveMood('Sedih')">
+                    <div class="emoji-icon">😔</div>
+                    <span>Sedih</span>
+                </button>
+                <button class="emoji-btn" onclick="window.location.href='bantuandarurat.html'">
+                    <div class="emoji-icon" style="background: #FFE0E0;">🆘</div>
+                    <span>Krisis</span>
+                </button>
+            </div>
+        </section>
+
+        <section class="card">
+            <div class="card-title">
+                Riwayat Emosimu
+                <a href="pantauriwayat.html" class="more">Lihat Detail</a>
+            </div>
+            <div class="chart-box" onclick="window.location.href='pantauriwayat.html'">
+                <div class="chart-bar" style="height: 40%;"></div>
+                <div class="chart-bar" style="height: 70%;"></div>
+                <div class="chart-bar" style="height: 30%;"></div>
+                <div class="chart-bar" style="height: 85%;"></div>
+                <div class="chart-bar active" style="height: 60%;"></div>
+            </div>
+            <p style="font-size: 0.75rem; color: var(--text-light); text-align: center;">
+                "Grafikmu membaik hari ini. Terus semangat ya!"
+            </p>
+        </section>
+
+        <div class="grid-menu">
+            <a href="bantuandarurat.html" class="menu-item emergency">
+                <i data-lucide="phone-call"></i>
+                Bantuan Darurat
+            </a>
+            <a href="peersupport.html" class="menu-item">
+                <i data-lucide="users"></i>
+                Peer Support
+            </a>
+            <a href="caripsikolog.html" class="menu-item">
+                <i data-lucide="map-pin"></i>
+                Cari Psikolog
+            </a>
+            <a href="relawan.html" class="menu-item">
+                <i data-lucide="heart-handshake"></i>
+                Relawan Denpasar
+            </a>
+        </div>
+
+        <a href="edukasi.html" class="banner">
+            <div class="banner-text">
+                <h4>Edukasi Anti-Bullying</h4>
+                <p>Tahu hakmu dan cara bersuara.</p>
+            </div>
+            <button class="banner-btn">Pelajari</button>
+        </a>
+    </div>
+
+    <nav class="bottom-nav">
+        <a href="index.html" class="nav-link active">
+            <i data-lucide="home"></i>
+            <span>Beranda</span>
+        </a>
+        <a href="curhat.html" class="nav-link">
+            <i data-lucide="message-circle"></i>
+            <span>Curhat</span>
+        </a>
+        <a href="pantauriwayat.html" class="nav-link">
+            <i data-lucide="history"></i>
+            <span>Riwayat</span>
+        </a>
+        <a href="profil.html" class="nav-link">
+            <i data-lucide="user"></i>
+            <span>Profil</span>
+        </a>
+    </nav>
+
+    <script>
+        // Inisialisasi icon Lucide
+        lucide.createIcons();
+
+        // Fungsi interaksi mood
+        function saveMood(mood) {
+            alert(`Terima kasih sudah berbagi, Kadek. Perasaan ${mood} kamu sudah tersimpan di riwayat.`);
+            // Di sini Anda bisa menambahkan logika pengalihan atau penyimpanan database
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Relawan Denpasar - Sewaka Rasa</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        :root {
+            --primary: #4A90E2;
+            --secondary: #E3F2FD;
+            --accent: #6FCF97;
+            --white: #FFFFFF;
+            --text-dark: #2D3436;
+            --text-light: #636E72;
+            --bg: #F0F7FF;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text-dark);
+            max-width: 480px;
+            margin: 0 auto;
+            min-height: 100vh;
+            padding-bottom: 100px;
+        }
+
+        header {
+            padding: 25px 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            background: var(--white);
+            border-bottom-left-radius: 25px;
+            border-bottom-right-radius: 25px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+        }
+
+        .back-btn {
+            background: var(--secondary);
+            border: none;
+            padding: 8px;
+            border-radius: 12px;
+            color: var(--primary);
+            text-decoration: none;
+            display: flex;
+        }
+
+        header h1 { font-size: 1.1rem; font-weight: 700; }
+
+        .container { padding: 20px; }
+
+        /* Hero Section */
+        .volunteer-hero {
+            background: linear-gradient(135deg, #FF9A9E 0%, #FAD0C4 100%);
+            border-radius: 24px;
+            padding: 25px;
+            color: white;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+
+        .volunteer-hero h2 { font-size: 1.2rem; margin-bottom: 8px; }
+        .volunteer-hero p { font-size: 0.8rem; opacity: 0.95; line-height: 1.5; }
+
+        /* Community Cards */
+        .section-label {
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--text-light);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        .community-card {
+            background: var(--white);
+            border-radius: 20px;
+            padding: 20px;
+            margin-bottom: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.02);
+            border: 1px solid rgba(0,0,0,0.01);
+        }
+
+        .com-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+
+        .com-logo {
+            width: 45px;
+            height: 45px;
+            background: var(--secondary);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+        }
+
+        .com-title h3 { font-size: 0.95rem; }
+        .com-title p { font-size: 0.75rem; color: var(--text-light); }
+
+        .com-desc {
+            font-size: 0.8rem;
+            color: var(--text-dark);
+            line-height: 1.5;
+            margin-bottom: 15px;
+        }
+
+        .com-tags {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .tag {
+            background: #F1F2F6;
+            padding: 4px 10px;
+            border-radius: 8px;
+            font-size: 0.65rem;
+            color: var(--text-light);
+            font-weight: 500;
+        }
+
+        .action-btns {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .btn-outline {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid var(--primary);
+            border-radius: 12px;
+            background: transparent;
+            color: var(--primary);
+            font-size: 0.8rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+            text-decoration: none;
+        }
+
+        .btn-fill {
+            flex: 1;
+            padding: 10px;
+            background: var(--primary);
+            border: none;
+            border-radius: 12px;
+            color: white;
+            font-size: 0.8rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+            text-decoration: none;
+        }
+
+        /* Bottom Nav */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            max-width: 480px;
+            background: var(--white);
+            display: flex;
+            justify-content: space-around;
+            padding: 15px 10px 25px;
+            border-radius: 25px 25px 0 0;
+            box-shadow: 0 -10px 30px rgba(0,0,0,0.05);
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: #B2BEC3;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-size: 0.65rem;
+            font-weight: 500;
+            gap: 5px;
+        }
+
+        .nav-link.active { color: var(--primary); }
+    </style>
+</head>
+<body>
+
+    <header>
+        <a href="index.html" class="back-btn">
+            <i data-lucide="chevron-left"></i>
+        </a>
+        <h1>Relawan Denpasar</h1>
+    </header>
+
+    <div class="container">
+        <div class="volunteer-hero">
+            <h2>Wadah Kepedulian</h2>
+            <p>Bersama komunitas lokal di Bali, kita ciptakan ruang sekolah yang aman dan bebas perundungan.</p>
+        </div>
+
+        <span class="section-label">Komunitas Terdekat</span>
+
+        <div class="community-card">
+            <div class="com-header">
+                <div class="com-logo"><i data-lucide="heart-handshake"></i></div>
+                <div class="com-title">
+                    <h3>Bali Mental Health Care</h3>
+                    <p>Denpasar Selatan</p>
+                </div>
+            </div>
+            <p class="com-desc">
+                Fokus pada pendampingan remaja yang mengalami trauma dan edukasi kesehatan mental di sekolah-sekolah area Bali.
+            </p>
+            <div class="com-tags">
+                <span class="tag">#AntiBullying</span>
+                <span class="tag">#KonselingRemaja</span>
+            </div>
+            <div class="action-btns">
+                <a href="#" class="btn-outline"><i data-lucide="instagram" size="16"></i> Profil</a>
+                <a href="https://wa.me/62812345678" class="btn-fill"><i data-lucide="message-circle" size="16"></i> Hubungi</a>
+            </div>
+        </div>
+
+        <div class="community-card">
+            <div class="com-header">
+                <div class="com-logo" style="background: #E8F5E9; color: #2E7D32;"><i data-lucide="users"></i></div>
+                <div class="com-title">
+                    <h3>Sahabat Sebaya Denpasar</h3>
+                    <p>Denpasar Utara</p>
+                </div>
+            </div>
+            <p class="com-desc">
+                Relawan dari kalangan mahasiswa psikologi yang siap menjadi pendengar setia untuk keluhan bullying.
+            </p>
+            <div class="com-tags">
+                <span class="tag">#PeerGroup</span>
+                <span class="tag">#CurhatAman</span>
+            </div>
+            <div class="action-btns">
+                <a href="#" class="btn-outline"><i data-lucide="globe" size="16"></i> Web</a>
+                <a href="https://wa.me/62812345679" class="btn-fill"><i data-lucide="message-circle" size="16"></i> Hubungi</a>
+            </div>
+        </div>
+
+        <div style="background: var(--white); padding: 15px; border-radius: 18px; display: flex; gap: 12px; align-items: center; border: 1px dashed var(--primary); margin-top: 10px;">
+            <i data-lucide="info" color="var(--primary)"></i>
+            <p style="font-size: 0.75rem; color: var(--text-light);">
+                Ingin bergabung menjadi relawan atau mendaftarkan komunitasmu? <a href="#" style="color: var(--primary); font-weight: 700; text-decoration: none;">Klik di sini</a>.
+            </p>
+        </div>
+    </div>
+
+    <nav class="bottom-nav">
+        <a href="index.html" class="nav-link">
+            <i data-lucide="home"></i>
+            <span>Beranda</span>
+        </a>
+        <a href="curhat.html" class="nav-link">
+            <i data-lucide="message-circle"></i>
+            <span>Curhat</span>
+        </a>
+        <a href="pantauriwayat.html" class="nav-link">
+            <i data-lucide="history"></i>
+            <span>Riwayat</span>
+        </a>
+        <a href="profil.html" class="nav-link">
+            <i data-lucide="user"></i>
+            <span>Profil</span>
+        </a>
+    </nav>
+
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>

@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ruang Curhat - Sewaka Rasa</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        :root {
+            --primary: #4A90E2;
+            --secondary: #E3F2FD;
+            --accent: #6FCF97;
+            --text-dark: #2D3436;
+            --text-light: #636E72;
+            --bg: #F0F7FF;
+            --white: #FFFFFF;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text-dark);
+            max-width: 480px;
+            margin: 0 auto;
+            min-height: 100vh;
+            padding-bottom: 100px;
+        }
+
+        header {
+            padding: 25px 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            background: var(--white);
+            border-bottom-left-radius: 25px;
+            border-bottom-right-radius: 25px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+        }
+
+        .back-btn {
+            background: var(--secondary);
+            border: none;
+            padding: 8px;
+            border-radius: 12px;
+            color: var(--primary);
+            text-decoration: none;
+            display: flex;
+        }
+
+        header h1 { font-size: 1.1rem; font-weight: 700; }
+
+        .container { padding: 20px; }
+
+        /* Mood Selector in Curhat */
+        .mood-box {
+            background: var(--white);
+            padding: 20px;
+            border-radius: 24px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.02);
+        }
+
+        .mood-box p {
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: var(--text-light);
+        }
+
+        .mood-options {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .mood-item {
+            cursor: pointer;
+            text-align: center;
+            transition: 0.2s;
+            opacity: 0.5;
+        }
+
+        .mood-item.active {
+            opacity: 1;
+            transform: scale(1.1);
+        }
+
+        .mood-emoji { font-size: 1.8rem; margin-bottom: 5px; display: block; }
+        .mood-item span { font-size: 0.7rem; font-weight: 500; }
+
+        /* Text Area */
+        .input-card {
+            background: var(--white);
+            border-radius: 24px;
+            padding: 20px;
+            box-shadow: 0 10px 25px rgba(74, 144, 226, 0.08);
+        }
+
+        .curhat-textarea {
+            width: 100%;
+            height: 250px;
+            border: none;
+            outline: none;
+            resize: none;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background: transparent;
+        }
+
+        .curhat-textarea::placeholder {
+            color: #B2BEC3;
+        }
+
+        .char-count {
+            text-align: right;
+            font-size: 0.7rem;
+            color: var(--text-light);
+            margin-top: 10px;
+        }
+
+        /* Privacy Toggle */
+        .privacy-box {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: 20px;
+            padding: 10px 5px;
+        }
+
+        .privacy-info { display: flex; align-items: center; gap: 8px; }
+        .privacy-info span { font-size: 0.8rem; font-weight: 500; color: var(--text-light); }
+
+        /* Submit Button */
+        .btn-send {
+            width: 100%;
+            padding: 16px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 18px;
+            font-size: 1rem;
+            font-weight: 700;
+            margin-top: 25px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            box-shadow: 0 8px 20px rgba(74, 144, 226, 0.3);
+            transition: 0.3s;
+        }
+
+        .btn-send:active { transform: scale(0.96); opacity: 0.9; }
+
+        /* Bottom Nav */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            max-width: 480px;
+            background: var(--white);
+            display: flex;
+            justify-content: space-around;
+            padding: 15px 10px 25px;
+            border-radius: 25px 25px 0 0;
+            box-shadow: 0 -10px 30px rgba(0,0,0,0.05);
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: #B2BEC3;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-size: 0.65rem;
+            font-weight: 500;
+            gap: 5px;
+        }
+
+        .nav-link.active { color: var(--primary); }
+    </style>
+</head>
+<body>
+
+    <header>
+        <a href="index.html" class="back-btn">
+            <i data-lucide="chevron-left"></i>
+        </a>
+        <h1>Ruang Cerita</h1>
+    </header>
+
+    <div class="container">
+        <div class="mood-box">
+            <p>Apa yang kamu rasakan saat ini?</p>
+            <div class="mood-options">
+                <div class="mood-item" onclick="selectMood(this)">
+                    <span class="mood-emoji">😊</span>
+                    <span>Lega</span>
+                </div>
+                <div class="mood-item active" onclick="selectMood(this)">
+                    <span class="mood-emoji">😐</span>
+                    <span>Biasa</span>
+                </div>
+                <div class="mood-item" onclick="selectMood(this)">
+                    <span class="mood-emoji">😔</span>
+                    <span>Sedih</span>
+                </div>
+                <div class="mood-item" onclick="selectMood(this)">
+                    <span class="mood-emoji">😤</span>
+                    <span>Marah</span>
+                </div>
+                <div class="mood-item" onclick="selectMood(this)">
+                    <span class="mood-emoji">😰</span>
+                    <span>Cemas</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="input-card">
+            <textarea class="curhat-textarea" placeholder="Tuliskan apa pun yang ada di pikiranmu... Ruang ini sepenuhnya milikmu."></textarea>
+            <div class="char-count">Kesehatan mentalmu berharga ✨</div>
+        </div>
+
+        <div class="privacy-box">
+            <div class="privacy-info">
+                <i data-lucide="lock" size="16" color="#6FCF97"></i>
+                <span>Cerita ini bersifat pribadi & rahasia</span>
+            </div>
+        </div>
+
+        <button class="btn-send" onclick="submitCurhat()">
+            Kirim Cerita
+            <i data-lucide="send" size="18"></i>
+        </button>
+    </div>
+
+    <nav class="bottom-nav">
+        <a href="index.html" class="nav-link">
+            <i data-lucide="home"></i>
+            <span>Beranda</span>
+        </a>
+        <a href="curhat.html" class="nav-link active">
+            <i data-lucide="message-circle"></i>
+            <span>Curhat</span>
+        </a>
+        <a href="pantauriwayat.html" class="nav-link">
+            <i data-lucide="history"></i>
+            <span>Riwayat</span>
+        </a>
+        <a href="profil.html" class="nav-link">
+            <i data-lucide="user"></i>
+            <span>Profil</span>
+        </a>
+    </nav>
+
+    <script>
+        lucide.createIcons();
+
+        function selectMood(element) {
+            document.querySelectorAll('.mood-item').forEach(item => {
+                item.classList.remove('active');
+            });
+            element.classList.add('active');
+        }
+
+        function submitCurhat() {
+            const text = document.querySelector('.curhat-textarea').value;
+            if(text.trim() === "") {
+                alert("Ceritakan sedikit apa yang kamu rasakan ya...");
+                return;
+            }
+            alert("Terima kasih sudah bercerita. Menumpahkan perasaan adalah langkah hebat untuk merasa lebih baik.");
+            window.location.href = "pantauriwayat.html";
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edukasi - Sewaka Rasa</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        :root {
+            --primary: #4A90E2;
+            --secondary: #E3F2FD;
+            --accent: #6FCF97;
+            --text-dark: #2D3436;
+            --text-light: #636E72;
+            --bg: #F0F7FF;
+            --white: #FFFFFF;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text-dark);
+            max-width: 480px;
+            margin: 0 auto;
+            min-height: 100vh;
+            padding-bottom: 100px;
+        }
+
+        header {
+            padding: 25px 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            background: var(--white);
+            border-bottom-left-radius: 25px;
+            border-bottom-right-radius: 25px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+        }
+
+        .back-btn {
+            background: var(--secondary);
+            border: none;
+            padding: 8px;
+            border-radius: 12px;
+            color: var(--primary);
+            text-decoration: none;
+            display: flex;
+        }
+
+        header h1 { font-size: 1.1rem; font-weight: 700; }
+
+        .container { padding: 20px; }
+
+        /* Featured Content */
+        .featured-video {
+            width: 100%;
+            aspect-ratio: 16/9;
+            background: #2d3436;
+            border-radius: 20px;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+
+        .play-btn {
+            width: 60px;
+            height: 60px;
+            background: var(--primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 2;
+        }
+
+        /* Article List */
+        .section-title {
+            font-size: 1rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            color: var(--text-dark);
+        }
+
+        .article-card {
+            background: var(--white);
+            border-radius: 20px;
+            overflow: hidden;
+            margin-bottom: 15px;
+            display: flex;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.02);
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .article-img {
+            width: 100px;
+            background: var(--secondary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+        }
+
+        .article-body {
+            padding: 15px;
+            flex: 1;
+        }
+
+        .article-body h4 { font-size: 0.85rem; margin-bottom: 5px; line-height: 1.4; }
+        .article-body p { font-size: 0.7rem; color: var(--text-light); }
+
+        /* Interactive Quiz Box */
+        .quiz-box {
+            background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+            padding: 20px;
+            border-radius: 24px;
+            margin-top: 10px;
+            text-align: center;
+        }
+
+        .quiz-box h3 { font-size: 1rem; margin-bottom: 8px; color: #2d3436; }
+        .quiz-box p { font-size: 0.75rem; margin-bottom: 15px; color: #636e72; }
+        
+        .btn-quiz {
+            background: var(--white);
+            color: var(--primary);
+            border: none;
+            padding: 10px 25px;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 0.8rem;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        }
+
+        /* Bottom Nav */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            max-width: 480px;
+            background: var(--white);
+            display: flex;
+            justify-content: space-around;
+            padding: 15px 10px 25px;
+            border-radius: 25px 25px 0 0;
+            box-shadow: 0 -10px 30px rgba(0,0,0,0.05);
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: #B2BEC3;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-size: 0.65rem;
+            font-weight: 500;
+            gap: 5px;
+        }
+
+        .nav-link.active { color: var(--primary); }
+    </style>
+</head>
+<body>
+
+    <header>
+        <a href="index.html" class="back-btn">
+            <i data-lucide="chevron-left"></i>
+        </a>
+        <h1>Edukasi & Literasi</h1>
+    </header>
+
+    <div class="container">
+        <div class="featured-video">
+            <div class="play-btn"><i data-lucide="play" fill="currentColor"></i></div>
+            <div style="position: absolute; bottom: 15px; left: 15px; color: white;">
+                <p style="font-size: 0.6rem; text-transform: uppercase; font-weight: 700; opacity: 0.8;">Video Pilihan</p>
+                <h4 style="font-size: 0.9rem;">Mengenali Jenis Cyber Bullying</h4>
+            </div>
+        </div>
+
+        <h3 class="section-title">Panduan Untukmu</h3>
+
+        <a href="#" class="article-card">
+            <div class="article-img">
+                <i data-lucide="shield-check" size="32"></i>
+            </div>
+            <div class="article-body">
+                <h4>Pahami Hak Legal Siswa</h4>
+                <p>Pelajari payung hukum yang melindungimu di sekolah.</p>
+            </div>
+        </a>
+
+        <a href="#" class="article-card">
+            <div class="article-img" style="background: #FFF9C4; color: #FBC02D;">
+                <i data-lucide="brain-circuit" size="32"></i>
+            </div>
+            <div class="article-body">
+                <h4>Menjaga Kesehatan Mental</h4>
+                <p>Tips meditasi ringan saat merasa cemas berlebihan.</p>
+            </div>
+        </a>
+
+        <a href="#" class="article-card">
+            <div class="article-img" style="background: #F8BBD0; color: #C2185B;">
+                <i data-lucide="megaphone" size="32"></i>
+            </div>
+            <div class="article-body">
+                <h4>Cara Melapor yang Aman</h4>
+                <p>Langkah-langika bicara ke guru tanpa rasa takut.</p>
+            </div>
+        </a>
+
+        <div class="quiz-box">
+            <h3>Uji Pemahamanmu</h3>
+            <p>Ikuti kuis singkat tentang cara menghadapi perundungan dan dapatkan lencana virtual!</p>
+            <button class="btn-quiz" onclick="alert('Memulai Kuis Edukasi...')">Mulai Kuis</button>
+        </div>
+    </div>
+
+    <nav class="bottom-nav">
+        <a href="index.html" class="nav-link">
+            <i data-lucide="home"></i>
+            <span>Beranda</span>
+        </a>
+        <a href="curhat.html" class="nav-link">
+            <i data-lucide="message-circle"></i>
+            <span>Curhat</span>
+        </a>
+        <a href="pantauriwayat.html" class="nav-link">
+            <i data-lucide="history"></i>
+            <span>Riwayat</span>
+        </a>
+        <a href="profil.html" class="nav-link">
+            <i data-lucide="user"></i>
+            <span>Profil</span>
+        </a>
+    </nav>
+
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>

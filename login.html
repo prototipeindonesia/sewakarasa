@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Masuk - Sewaka Rasa</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        :root {
+            --primary: #4A90E2;
+            --secondary: #E3F2FD;
+            --text-dark: #2D3436;
+            --text-light: #636E72;
+            --bg: #F0F7FF;
+            --white: #FFFFFF;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text-dark);
+            max-width: 480px;
+            margin: 0 auto;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .login-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .logo-circle {
+            width: 80px;
+            height: 80px;
+            background: var(--white);
+            border-radius: 25px;
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+            box-shadow: 0 10px 25px rgba(74, 144, 226, 0.15);
+        }
+
+        .login-header h1 {
+            font-size: 1.6rem;
+            color: var(--primary);
+            margin-bottom: 8px;
+        }
+
+        .login-header p {
+            font-size: 0.9rem;
+            color: var(--text-light);
+        }
+
+        /* Role Selector */
+        .role-selector {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .role-option {
+            background: var(--white);
+            padding: 15px;
+            border-radius: 20px;
+            text-align: center;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: all 0.2s;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+        }
+
+        .role-option.active {
+            border-color: var(--primary);
+            background: var(--secondary);
+        }
+
+        .role-option i {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--text-light);
+        }
+
+        .role-option.active i {
+            color: var(--primary);
+        }
+
+        .role-option span {
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        /* Input Form */
+        .form-group {
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .form-group i {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #B2BEC3;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 15px 15px 15px 45px;
+            border-radius: 15px;
+            border: 1px solid #E0EBF7;
+            outline: none;
+            font-size: 0.9rem;
+            transition: 0.2s;
+        }
+
+        .form-group input:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 4px rgba(74, 144, 226, 0.1);
+        }
+
+        .btn-login {
+            width: 100%;
+            padding: 16px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 18px;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            box-shadow: 0 8px 20px rgba(74, 144, 226, 0.25);
+            transition: 0.3s;
+            margin-top: 10px;
+        }
+
+        .btn-login:active {
+            transform: scale(0.97);
+        }
+
+        .footer-links {
+            text-align: center;
+            margin-top: 30px;
+            font-size: 0.8rem;
+            color: var(--text-light);
+        }
+
+        .footer-links a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="login-header">
+        <div class="logo-circle">
+            <i data-lucide="heart-handshake" size="40"></i>
+        </div>
+        <h1>Sewaka Rasa</h1>
+        <p>Masuk untuk memulai perjalananmu</p>
+    </div>
+
+    <div class="role-selector">
+        <div class="role-option active" id="role-siswa" onclick="setRole('siswa')">
+            <i data-lucide="user"></i>
+            <span>Siswa</span>
+        </div>
+        <div class="role-option" id="role-guru" onclick="setRole('guru')">
+            <i data-lucide="graduation-cap"></i>
+            <span>Guru BK</span>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <i data-lucide="mail" size="18"></i>
+        <input type="text" id="username" placeholder="NISN atau Username">
+    </div>
+
+    <div class="form-group">
+        <i data-lucide="lock" size="18"></i>
+        <input type="password" id="password" placeholder="Kata Sandi">
+    </div>
+
+    <button class="btn-login" onclick="handleLogin()">Masuk Sekarang</button>
+
+    <div class="footer-links">
+        <p>Lupa kata sandi? <a href="lupasandi.html">Hubungi Admin</a></p>
+        <p style="margin-top: 10px;">Belum punya akun? <a href="daftarakun.html">Daftar Baru</a></p>
+    </div>
+
+    <script>
+        lucide.createIcons();
+        
+        let selectedRole = 'siswa';
+
+        function setRole(role) {
+            selectedRole = role;
+            // Update UI
+            document.getElementById('role-siswa').classList.toggle('active', role === 'siswa');
+            document.getElementById('role-guru').classList.toggle('active', role === 'guru');
+            
+            // Update placeholder berdasarkan role
+            const userInp = document.getElementById('username');
+            userInp.placeholder = role === 'siswa' ? 'NISN atau Username' : 'NIP atau Username';
+        }
+
+        function handleLogin() {
+            const user = document.getElementById('username').value;
+            const pass = document.getElementById('password').value;
+
+            if(user === "" || pass === "") {
+                alert("Mohon isi semua kolom log in.");
+                return;
+            }
+
+            // Simulasi pengalihan halaman berdasarkan role
+            if (selectedRole === 'siswa') {
+                window.location.href = "index.html";
+            } else {
+                window.location.href = "dashboardbk.html";
+            }
+        }
+    </script>
+</body>
+</html>

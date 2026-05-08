@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Siswa - Sewaka Rasa</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        :root {
+            --primary: #1E3A8A;
+            --bg: #F8FAFC;
+            --white: #FFFFFF;
+            --text-dark: #1E293B;
+            --text-light: #64748B;
+            --success: #10B981;
+            --warning: #F59E0B;
+            --danger: #EF4444;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text-dark);
+            max-width: 480px;
+            margin: 0 auto;
+            min-height: 100vh;
+            padding-bottom: 120px;
+        }
+
+        header {
+            padding: 25px 20px;
+            background: var(--white);
+            border-bottom: 1px solid #E2E8F0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        header h1 { font-size: 1.1rem; font-weight: 700; margin-bottom: 15px; }
+
+        /* Search Bar */
+        .search-container {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .search-container i {
+            position: absolute;
+            left: 12px;
+            color: #B2BEC3;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 12px 12px 12px 40px;
+            border-radius: 12px;
+            border: 1px solid #E2E8F0;
+            background: #F1F5F9;
+            outline: none;
+            font-size: 0.85rem;
+        }
+
+        .container { padding: 20px; }
+
+        /* Section Stats */
+        .class-filter {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            overflow-x: auto;
+            scrollbar-width: none;
+            padding-bottom: 5px;
+        }
+
+        .filter-chip {
+            padding: 6px 14px;
+            background: var(--white);
+            border: 1px solid #E2E8F0;
+            border-radius: 10px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--text-light);
+            white-space: nowrap;
+        }
+
+        .filter-chip.active {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        /* Student Card */
+        .student-card {
+            background: var(--white);
+            border-radius: 20px;
+            padding: 15px;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.02);
+            border: 1px solid transparent;
+        }
+
+        .student-avatar {
+            width: 50px;
+            height: 50px;
+            background: #F1F5F9;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+        }
+
+        .student-info { flex: 1; }
+        .student-info h4 { font-size: 0.9rem; font-weight: 700; margin-bottom: 2px; }
+        .student-info p { font-size: 0.7rem; color: var(--text-light); }
+
+        .mood-status {
+            text-align: right;
+        }
+
+        .mood-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            display: inline-block;
+            margin-bottom: 5px;
+        }
+
+        .status-text {
+            font-size: 0.65rem;
+            font-weight: 700;
+            display: block;
+        }
+
+        /* Mood Colors */
+        .mood-stable { background: var(--success); color: var(--success); }
+        .mood-warning { background: var(--warning); color: var(--warning); }
+        .mood-critical { background: var(--danger); color: var(--danger); }
+
+        /* Floating Menu */
+        .floating-menu {
+            position: fixed;
+            bottom: 25px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 90%;
+            max-width: 420px;
+            background: var(--primary);
+            padding: 12px 10px;
+            border-radius: 24px;
+            display: flex;
+            justify-content: space-around;
+            box-shadow: 0 15px 35px rgba(30, 58, 138, 0.4);
+            z-index: 100;
+        }
+
+        .f-item { 
+            color: rgba(255,255,255,0.5); 
+            text-decoration: none; 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            gap: 4px; 
+            font-size: 0.65rem; 
+            font-weight: 500;
+        }
+
+        .f-item.active { color: white; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Data & Kondisi Siswa</h1>
+        <div class="search-container">
+            <i data-lucide="search" size="18"></i>
+            <input type="text" class="search-input" placeholder="Cari nama siswa atau NISN...">
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="class-filter">
+            <div class="filter-chip active">Semua</div>
+            <div class="filter-chip">Kelas X</div>
+            <div class="filter-chip">Kelas XI</div>
+            <div class="filter-chip">Kelas XII</div>
+            <div class="filter-chip">IPA 1</div>
+        </div>
+
+        <div class="student-list">
+            <div class="student-card" onclick="location.href='profil-siswa-detail.html'">
+                <div class="student-avatar"><i data-lucide="user" size="24"></i></div>
+                <div class="student-info">
+                    <h4>Kadek Wijaya</h4>
+                    <p>NISN: 0045678910 • Kelas XI-A</p>
+                </div>
+                <div class="mood-status">
+                    <span class="mood-dot mood-stable"></span>
+                    <span class="status-text" style="color: var(--success)">Stabil</span>
+                </div>
+            </div>
+
+            <div class="student-card">
+                <div class="student-avatar"><i data-lucide="user" size="24"></i></div>
+                <div class="student-info">
+                    <h4>Siti Aminah</h4>
+                    <p>NISN: 0045678921 • Kelas X-B</p>
+                </div>
+                <div class="mood-status">
+                    <span class="mood-dot mood-warning"></span>
+                    <span class="status-text" style="color: var(--warning)">Cemas</span>
+                </div>
+            </div>
+
+            <div class="student-card">
+                <div class="student-avatar"><i data-lucide="user" size="24"></i></div>
+                <div class="student-info">
+                    <h4>Budi Santoso</h4>
+                    <p>NISN: 0045678955 • Kelas XII-C</p>
+                </div>
+                <div class="mood-status">
+                    <span class="mood-dot mood-critical"></span>
+                    <span class="status-text" style="color: var(--danger)">Butuh Bantuan</span>
+                </div>
+            </div>
+
+            <div class="student-card">
+                <div class="student-avatar"><i data-lucide="user" size="24"></i></div>
+                <div class="student-info">
+                    <h4>Andi Saputra</h4>
+                    <p>NISN: 0045678977 • Kelas XI-A</p>
+                </div>
+                <div class="mood-status">
+                    <span class="mood-dot mood-stable"></span>
+                    <span class="status-text" style="color: var(--success)">Stabil</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <nav class="floating-menu">
+        <a href="dashboardbk.html" class="f-item">
+            <i data-lucide="layout-grid" size="20"></i>
+            <span>Beranda</span>
+        </a>
+        <a href="laporanbk.html" class="f-item">
+            <i data-lucide="file-warning" size="20"></i>
+            <span>Laporan</span>
+        </a>
+        <a href="datasiswa.html" class="f-item active">
+            <i data-lucide="users-2" size="20"></i>
+            <span>Siswa</span>
+        </a>
+        <a href="login.html" class="f-item">
+            <i data-lucide="log-out" size="20"></i>
+            <span>Keluar</span>
+        </a>
+    </nav>
+
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>

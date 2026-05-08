@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daftar Laporan - Sewaka Rasa</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        :root {
+            --primary: #1E3A8A;
+            --bg: #F8FAFC;
+            --white: #FFFFFF;
+            --text-dark: #1E293B;
+            --text-light: #64748B;
+            --danger: #EF4444;
+            --warning: #F59E0B;
+            --success: #10B981;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text-dark);
+            max-width: 480px;
+            margin: 0 auto;
+            min-height: 100vh;
+            padding-bottom: 120px;
+        }
+
+        header {
+            padding: 25px 20px;
+            background: var(--white);
+            border-bottom: 1px solid #E2E8F0;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .back-btn {
+            background: #F1F5F9;
+            border: none;
+            padding: 8px;
+            border-radius: 12px;
+            color: var(--primary);
+            text-decoration: none;
+            display: flex;
+        }
+
+        header h1 { font-size: 1.1rem; font-weight: 700; }
+
+        .container { padding: 20px; }
+
+        /* Filter Tabs */
+        .filter-tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            overflow-x: auto;
+            padding-bottom: 5px;
+            scrollbar-width: none;
+        }
+
+        .tab {
+            padding: 8px 16px;
+            background: var(--white);
+            border: 1px solid #E2E8F0;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--text-light);
+            white-space: nowrap;
+            cursor: pointer;
+        }
+
+        .tab.active {
+            background: var(--primary);
+            color: var(--white);
+            border-color: var(--primary);
+        }
+
+        /* Report Cards */
+        .report-card {
+            background: var(--white);
+            border-radius: 20px;
+            padding: 18px;
+            margin-bottom: 15px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+            border: 1px solid transparent;
+            transition: 0.2s;
+        }
+
+        .report-card:active { transform: scale(0.98); }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 12px;
+        }
+
+        .status-badge {
+            padding: 4px 10px;
+            border-radius: 8px;
+            font-size: 0.65rem;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .status-new { background: #FEE2E2; color: var(--danger); }
+        .status-process { background: #FEF3C7; color: var(--warning); }
+        .status-done { background: #D1FAE5; color: var(--success); }
+
+        .report-id { font-size: 0.7rem; color: #B2BEC3; font-weight: 600; }
+        .report-title { font-size: 0.95rem; font-weight: 700; margin-bottom: 6px; }
+        .report-desc { font-size: 0.8rem; color: var(--text-light); line-height: 1.4; margin-bottom: 15px; }
+
+        .card-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 12px;
+            border-top: 1px dashed #E2E8F0;
+        }
+
+        .reporter-info { display: flex; align-items: center; gap: 8px; }
+        .reporter-info i { color: var(--primary); }
+        .reporter-info span { font-size: 0.75rem; font-weight: 600; color: var(--text-dark); }
+
+        .date-info { font-size: 0.7rem; color: #B2BEC3; }
+
+        /* Floating Nav Fix */
+        .floating-menu {
+            position: fixed;
+            bottom: 25px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 90%;
+            max-width: 420px;
+            background: var(--primary);
+            padding: 12px 10px;
+            border-radius: 24px;
+            display: flex;
+            justify-content: space-around;
+            box-shadow: 0 15px 35px rgba(30, 58, 138, 0.4);
+            z-index: 100;
+        }
+
+        .f-item { 
+            color: rgba(255,255,255,0.5); 
+            text-decoration: none; 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            gap: 4px; 
+            font-size: 0.65rem; 
+            font-weight: 500;
+        }
+
+        .f-item.active { color: white; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <a href="dashboardbk.html" class="back-btn">
+            <i data-lucide="chevron-left" size="20"></i>
+        </a>
+        <h1>Manajemen Laporan</h1>
+    </header>
+
+    <div class="container">
+        <div class="filter-tabs">
+            <div class="tab active">Semua</div>
+            <div class="tab">Terbaru</div>
+            <div class="tab">Diproses</div>
+            <div class="tab">Selesai</div>
+        </div>
+
+        <div class="report-list">
+            <div class="report-card" onclick="location.href='detail-laporan.html'">
+                <div class="card-header">
+                    <span class="report-id">#SR-2026001</span>
+                    <span class="status-badge status-new">Baru</span>
+                </div>
+                <h4 class="report-title">Perundungan Verbal di Kelas</h4>
+                <p class="report-desc">Diejek secara terus menerus mengenai kondisi ekonomi keluarga saat jam istirahat...</p>
+                <div class="card-footer">
+                    <div class="reporter-info">
+                        <i data-lucide="user" size="14"></i>
+                        <span>Anonim (Siswa)</span>
+                    </div>
+                    <span class="date-info">10 Menit Lalu</span>
+                </div>
+            </div>
+
+            <div class="report-card">
+                <div class="card-header">
+                    <span class="report-id">#SR-2026002</span>
+                    <span class="status-badge status-process">Diproses</span>
+                </div>
+                <h4 class="report-title">Pengucilan (Social Bullying)</h4>
+                <p class="report-desc">Satu kelompok kelas sengaja mengeluarkan saya dari grup belajar dan tidak mau berbicara...</p>
+                <div class="card-footer">
+                    <div class="reporter-info">
+                        <i data-lucide="user-check" size="14"></i>
+                        <span>Rina (XI-IPA 2)</span>
+                    </div>
+                    <span class="date-info">2 Jam Lalu</span>
+                </div>
+            </div>
+
+            <div class="report-card">
+                <div class="card-header">
+                    <span class="report-id">#SR-2025988</span>
+                    <span class="status-badge status-done">Selesai</span>
+                </div>
+                <h4 class="report-title">Cyber Bullying di Instagram</h4>
+                <p class="report-desc">Komentar kasar di postingan foto. Sudah dilakukan mediasi antara kedua belah pihak.</p>
+                <div class="card-footer">
+                    <div class="reporter-info">
+                        <i data-lucide="shield-check" size="14"></i>
+                        <span>Budi (X-C)</span>
+                    </div>
+                    <span class="date-info">Kemarin</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <nav class="floating-menu">
+        <a href="dashboardbk.html" class="f-item">
+            <i data-lucide="layout-grid" size="20"></i>
+            <span>Beranda</span>
+        </a>
+        <a href="laporanbk.html" class="f-item active">
+            <i data-lucide="file-warning" size="20"></i>
+            <span>Laporan</span>
+        </a>
+        <a href="datasiswa.html" class="f-item">
+            <i data-lucide="users-2" size="20"></i>
+            <span>Siswa</span>
+        </a>
+        <a href="login.html" class="f-item">
+            <i data-lucide="log-out" size="20"></i>
+            <span>Keluar</span>
+        </a>
+    </nav>
+
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>

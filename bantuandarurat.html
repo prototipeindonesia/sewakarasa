@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bantuan Darurat - Sewaka Rasa</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        :root {
+            --primary: #4A90E2;
+            --danger: #EB5757;
+            --danger-light: #FFF0F0;
+            --text-dark: #2D3436;
+            --text-light: #636E72;
+            --bg: #FDFDFD;
+            --white: #FFFFFF;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text-dark);
+            max-width: 480px;
+            margin: 0 auto;
+            min-height: 100vh;
+            padding-bottom: 40px;
+        }
+
+        /* Header krisis - warna lebih tegas */
+        header {
+            padding: 25px 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            background: var(--danger);
+            color: white;
+            border-bottom-left-radius: 25px;
+            border-bottom-right-radius: 25px;
+            box-shadow: 0 4px 15px rgba(235, 87, 87, 0.2);
+        }
+
+        .back-btn {
+            background: rgba(255,255,255,0.2);
+            border: none;
+            padding: 8px;
+            border-radius: 12px;
+            color: white;
+            text-decoration: none;
+            display: flex;
+        }
+
+        header h1 { font-size: 1.1rem; font-weight: 700; }
+
+        .container { padding: 20px; }
+
+        .emergency-hero {
+            text-align: center;
+            margin: 20px 0 30px;
+        }
+
+        .emergency-hero h2 {
+            font-size: 1.4rem;
+            margin-bottom: 10px;
+            color: var(--danger);
+        }
+
+        .emergency-hero p {
+            font-size: 0.9rem;
+            color: var(--text-light);
+            line-height: 1.5;
+        }
+
+        /* Action Buttons */
+        .call-card {
+            background: var(--white);
+            border: 2px solid var(--danger-light);
+            border-radius: 24px;
+            padding: 20px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            text-decoration: none;
+            color: var(--text-dark);
+            transition: transform 0.2s;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.02);
+        }
+
+        .call-card:active { transform: scale(0.97); }
+
+        .icon-circle {
+            width: 50px;
+            height: 50px;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .bg-red { background: var(--danger-light); color: var(--danger); }
+        .bg-blue { background: #E3F2FD; color: var(--primary); }
+        .bg-green { background: #E8F5E9; color: #27AE60; }
+
+        .call-info { flex: 1; }
+        .call-info h3 { font-size: 1rem; font-weight: 700; margin-bottom: 2px; }
+        .call-info p { font-size: 0.75rem; color: var(--text-light); }
+
+        /* Denpasar Specific Services */
+        .local-services {
+            margin-top: 30px;
+        }
+
+        .local-services h4 {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-light);
+            margin-bottom: 15px;
+        }
+
+        .service-item {
+            background: var(--white);
+            padding: 15px;
+            border-radius: 18px;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-left: 4px solid var(--primary);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+        }
+
+        .service-details h5 { font-size: 0.9rem; margin-bottom: 2px; }
+        .service-details p { font-size: 0.7rem; color: var(--text-light); }
+
+        .btn-mini-call {
+            background: var(--secondary);
+            color: var(--primary);
+            border: none;
+            padding: 8px;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+
+        /* Footer Note */
+        .safety-note {
+            background: #F4F7F6;
+            padding: 15px;
+            border-radius: 15px;
+            margin-top: 20px;
+            font-size: 0.75rem;
+            color: var(--text-light);
+            line-height: 1.4;
+            display: flex;
+            gap: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <a href="index.html" class="back-btn">
+            <i data-lucide="chevron-left"></i>
+        </a>
+        <h1>Pusat Bantuan Darurat</h1>
+    </header>
+
+    <div class="container">
+        <div class="emergency-hero">
+            <i data-lucide="shield-alert" size="48" style="color: var(--danger); margin-bottom: 15px;"></i>
+            <h2>Kamu Tidak Sendirian</h2>
+            <p>Jika kamu merasa dalam bahaya atau butuh teman bicara sekarang juga, silakan gunakan tombol di bawah ini.</p>
+        </div>
+
+        <a href="tel:112" class="call-card">
+            <div class="icon-circle bg-red">
+                <i data-lucide="phone-call"></i>
+            </div>
+            <div class="call-info">
+                <h3>Panggilan Darurat (112)</h3>
+                <p>Terhubung langsung dengan layanan darurat terpadu.</p>
+            </div>
+            <i data-lucide="chevron-right" size="18" color="#ccc"></i>
+        </a>
+
+        <a href="https://wa.me/628123456789" class="call-card">
+            <div class="icon-circle bg-green">
+                <i data-lucide="message-circle"></i>
+            </div>
+            <div class="call-info">
+                <h3>WhatsApp Konselor BK</h3>
+                <p>Chat pribadi dan rahasia dengan guru pembimbing.</p>
+            </div>
+            <i data-lucide="chevron-right" size="18" color="#ccc"></i>
+        </a>
+
+        <a href="tel:119" class="call-card">
+            <div class="icon-circle bg-blue">
+                <i data-lucide="heart"></i>
+            </div>
+            <div class="call-info">
+                <h3>Hotline Sejiwa (119)</h3>
+                <p>Layanan dukungan psikologi khusus kesehatan mental.</p>
+            </div>
+            <i data-lucide="chevron-right" size="18" color="#ccc"></i>
+        </a>
+
+        <div class="local-services">
+            <h4>Layanan di Denpasar</h4>
+            
+            <div class="service-item">
+                <div class="service-details">
+                    <h5>RSUP Prof. Ngoerah</h5>
+                    <p>Jl. Diponegoro, Denpasar (Layanan 24 Jam)</p>
+                </div>
+                <a href="tel:0361227911" class="btn-mini-call"><i data-lucide="phone" size="16"></i></a>
+            </div>
+
+            <div class="service-item">
+                <div class="service-details">
+                    <h5>Puskesmas Denpasar Selatan</h5>
+                    <p>Layanan Konseling Psikologi Remaja</p>
+                </div>
+                <a href="tel:0361223555" class="btn-mini-call"><i data-lucide="phone" size="16"></i></a>
+            </div>
+        </div>
+
+        <div class="safety-note">
+            <i data-lucide="info" size="20" style="flex-shrink:0;"></i>
+            <p>Privasimu adalah prioritas kami. Semua panggilan ke nomor darurat ini bersifat rahasia dan bertujuan untuk memberikan perlindungan segera.</p>
+        </div>
+    </div>
+
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>

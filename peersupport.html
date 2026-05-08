@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Peer Support - Sewaka Rasa</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        :root {
+            --primary: #4A90E2;
+            --secondary: #E3F2FD;
+            --accent: #6FCF97;
+            --text-dark: #2D3436;
+            --text-light: #636E72;
+            --bg: #F0F7FF;
+            --white: #FFFFFF;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text-dark);
+            max-width: 480px;
+            margin: 0 auto;
+            min-height: 100vh;
+            padding-bottom: 100px;
+        }
+
+        header {
+            padding: 25px 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            background: var(--white);
+            border-bottom-left-radius: 25px;
+            border-bottom-right-radius: 25px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+        }
+
+        .back-btn {
+            background: var(--secondary);
+            border: none;
+            padding: 8px;
+            border-radius: 12px;
+            color: var(--primary);
+            text-decoration: none;
+            display: flex;
+        }
+
+        header h1 { font-size: 1.1rem; font-weight: 700; }
+
+        .container { padding: 20px; }
+
+        /* Hero Section */
+        .hero-support {
+            background: linear-gradient(135deg, #6FCF97 0%, #4facfe 100%);
+            border-radius: 24px;
+            padding: 25px;
+            color: white;
+            margin-bottom: 25px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-support h2 { font-size: 1.2rem; margin-bottom: 8px; position: relative; z-index: 2; }
+        .hero-support p { font-size: 0.8rem; opacity: 0.9; line-height: 1.4; position: relative; z-index: 2; }
+        
+        .hero-support i.bg-icon {
+            position: absolute;
+            right: -10px;
+            bottom: -10px;
+            opacity: 0.2;
+            transform: rotate(-15deg);
+        }
+
+        /* Tabs */
+        .tab-container {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .tab {
+            flex: 1;
+            padding: 10px;
+            border-radius: 12px;
+            border: none;
+            background: #E0EBF7;
+            color: var(--text-light);
+            font-size: 0.8rem;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .tab.active {
+            background: var(--primary);
+            color: white;
+        }
+
+        /* Peer List */
+        .section-title {
+            font-size: 0.9rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .peer-card {
+            background: var(--white);
+            border-radius: 20px;
+            padding: 15px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.02);
+            transition: 0.2s;
+        }
+
+        .peer-card:active { transform: scale(0.98); }
+
+        .peer-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 15px;
+            background: var(--secondary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: var(--primary);
+            font-size: 1.2rem;
+        }
+
+        .peer-info { flex: 1; }
+        .peer-info h4 { font-size: 0.9rem; margin-bottom: 2px; }
+        .peer-info p { font-size: 0.7rem; color: var(--text-light); }
+        .status-badge {
+            font-size: 0.6rem;
+            padding: 2px 8px;
+            border-radius: 10px;
+            background: #E8F5E9;
+            color: #27AE60;
+            font-weight: 700;
+        }
+
+        .chat-btn {
+            background: var(--secondary);
+            color: var(--primary);
+            border: none;
+            padding: 10px;
+            border-radius: 12px;
+            cursor: pointer;
+        }
+
+        /* Anonymous Forum Snippet */
+        .forum-card {
+            background: var(--white);
+            border-radius: 20px;
+            padding: 15px;
+            margin-bottom: 12px;
+            border-left: 4px solid var(--accent);
+        }
+
+        .forum-card p { font-size: 0.8rem; line-height: 1.5; font-style: italic; color: var(--text-dark); }
+        .forum-footer {
+            margin-top: 10px;
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.65rem;
+            color: var(--text-light);
+        }
+
+        /* Nav */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            max-width: 480px;
+            background: var(--white);
+            display: flex;
+            justify-content: space-around;
+            padding: 15px 10px 25px;
+            border-radius: 25px 25px 0 0;
+            box-shadow: 0 -10px 30px rgba(0,0,0,0.05);
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: #B2BEC3;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-size: 0.65rem;
+            font-weight: 500;
+            gap: 5px;
+        }
+
+        .nav-link.active { color: var(--primary); }
+    </style>
+</head>
+<body>
+
+    <header>
+        <a href="index.html" class="back-btn">
+            <i data-lucide="chevron-left"></i>
+        </a>
+        <h1>Peer Support</h1>
+    </header>
+
+    <div class="container">
+        <div class="hero-support">
+            <i data-lucide="users" class="bg-icon" size="80"></i>
+            <h2>Kamu Punya Teman</h2>
+            <p>Ngobrol santai dengan teman sebaya yang siap mendengarkan ceritamu secara rahasia.</p>
+        </div>
+
+        <div class="tab-container">
+            <button class="tab active">Teman Curhat</button>
+            <button class="tab">Cerita Anonim</button>
+        </div>
+
+        <div class="section-title">
+            <i data-lucide="message-circle-heart" size="18" color="#6FCF97"></i>
+            Tersedia Sekarang
+        </div>
+
+        <div class="peer-card">
+            <div class="peer-avatar">A</div>
+            <div class="peer-info">
+                <h4>Aditya <span class="status-badge">Online</span></h4>
+                <p>Kelas XII - Suka dengerin musik & diskusi.</p>
+            </div>
+            <button class="chat-btn"><i data-lucide="message-square"></i></button>
+        </div>
+
+        <div class="peer-card">
+            <div class="peer-avatar" style="background:#F3E5F5; color:#9C27B0;">S</div>
+            <div class="peer-info">
+                <h4>Saras <span class="status-badge">Online</span></h4>
+                <p>Kelas XI - Pendengar yang baik, suka kucing.</p>
+            </div>
+            <button class="chat-btn"><i data-lucide="message-square"></i></button>
+        </div>
+
+        <div class="section-title" style="margin-top: 25px;">
+            <i data-lucide="sparkles" size="18" color="#4A90E2"></i>
+            Ruang Cerita
+        </div>
+
+        <div class="forum-card">
+            <p>"Hari ini aku berani bicara ke guru tentang perasaanku. Ternyata melegakan..."</p>
+            <div class="forum-footer">
+                <span>Oleh: Anonim</span>
+                <span>2 jam yang lalu</span>
+            </div>
+        </div>
+
+        <div class="forum-card">
+            <p>"Jangan menyerah ya buat kalian yang lagi ngerasa sendirian di sekolah. Kita bareng-bareng."</p>
+            <div class="forum-footer">
+                <span>Oleh: Anonim</span>
+                <span>5 jam yang lalu</span>
+            </div>
+        </div>
+    </div>
+
+    <nav class="bottom-nav">
+        <a href="index.html" class="nav-link">
+            <i data-lucide="home"></i>
+            <span>Beranda</span>
+        </a>
+        <a href="curhat.html" class="nav-link">
+            <i data-lucide="message-circle"></i>
+            <span>Curhat</span>
+        </a>
+        <a href="pantauriwayat.html" class="nav-link">
+            <i data-lucide="history"></i>
+            <span>Riwayat</span>
+        </a>
+        <a href="profil.html" class="nav-link">
+            <i data-lucide="user"></i>
+            <span>Profil</span>
+        </a>
+    </nav>
+
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>
