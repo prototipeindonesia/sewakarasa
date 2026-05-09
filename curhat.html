@@ -3,204 +3,196 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ruang Curhat - Sewaka Rasa</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <title>Ruang Cerita - Sewaka Rasa</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/lucide@latest"></script>
     <style>
         :root {
-            --primary: #4A90E2;
-            --secondary: #E3F2FD;
-            --accent: #6FCF97;
-            --text-dark: #2D3436;
-            --text-light: #636E72;
-            --bg: #F0F7FF;
+            /* Identitas Warna Sewaka Rasa */
+            --primary-deep: #1E3A8A;
+            --primary-soft: #3B82F6;
+            --accent-safe: #10B981;
+            --bg-calm: #F8FAFC;
             --white: #FFFFFF;
+            --text-main: #1E293B;
+            --text-muted: #64748B;
         }
 
         * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Inter', sans-serif;
+            margin: 0; padding: 0; box-sizing: border-box;
+            font-family: 'Plus Jakarta Sans', sans-serif;
             -webkit-tap-highlight-color: transparent;
         }
 
         body {
-            background-color: var(--bg);
-            color: var(--text-dark);
+            background-color: var(--bg-calm);
+            color: var(--text-main);
             max-width: 480px;
             margin: 0 auto;
             min-height: 100vh;
-            padding-bottom: 100px;
+            padding-bottom: 110px;
         }
 
+        /* Header Konsisten */
         header {
-            padding: 25px 20px;
+            padding: 30px 20px;
+            background: linear-gradient(135deg, var(--primary-deep) 0%, var(--primary-soft) 100%);
+            border-bottom-left-radius: 35px;
+            border-bottom-right-radius: 35px;
+            color: white;
             display: flex;
             align-items: center;
             gap: 15px;
-            background: var(--white);
-            border-bottom-left-radius: 25px;
-            border-bottom-right-radius: 25px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+            box-shadow: 0 10px 25px rgba(30, 58, 138, 0.1);
         }
 
         .back-btn {
-            background: var(--secondary);
+            background: rgba(255,255,255,0.2);
             border: none;
             padding: 8px;
             border-radius: 12px;
-            color: var(--primary);
-            text-decoration: none;
+            color: white;
             display: flex;
+            text-decoration: none;
         }
 
-        header h1 { font-size: 1.1rem; font-weight: 700; }
+        header h1 { font-size: 1.2rem; font-weight: 800; }
 
-        .container { padding: 20px; }
+        .container { padding: 25px 20px; }
 
-        /* Mood Selector in Curhat */
-        .mood-box {
+        /* Mood Selector */
+        .mood-card {
             background: var(--white);
-            padding: 20px;
-            border-radius: 24px;
+            padding: 22px;
+            border-radius: 28px;
             margin-bottom: 20px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.02);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.02);
+            border: 1px solid #F1F5F9;
         }
 
-        .mood-box p {
+        .mood-card p {
             font-size: 0.85rem;
-            font-weight: 600;
-            margin-bottom: 15px;
-            color: var(--text-light);
+            font-weight: 700;
+            margin-bottom: 18px;
+            color: var(--text-muted);
+            text-align: center;
         }
 
         .mood-options {
             display: flex;
             justify-content: space-between;
+            gap: 5px;
         }
 
         .mood-item {
             cursor: pointer;
             text-align: center;
-            transition: 0.2s;
-            opacity: 0.5;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            opacity: 0.4;
+            flex: 1;
+            padding: 10px 5px;
+            border-radius: 18px;
         }
 
         .mood-item.active {
             opacity: 1;
-            transform: scale(1.1);
+            background: #EFF6FF;
+            transform: translateY(-5px);
         }
 
-        .mood-emoji { font-size: 1.8rem; margin-bottom: 5px; display: block; }
-        .mood-item span { font-size: 0.7rem; font-weight: 500; }
+        .mood-emoji { font-size: 1.8rem; margin-bottom: 8px; display: block; }
+        .mood-item span { font-size: 0.65rem; font-weight: 800; color: var(--primary-deep); }
 
-        /* Text Area */
-        .input-card {
+        /* Input Area */
+        .input-area {
             background: var(--white);
-            border-radius: 24px;
-            padding: 20px;
-            box-shadow: 0 10px 25px rgba(74, 144, 226, 0.08);
+            border-radius: 28px;
+            padding: 22px;
+            box-shadow: 0 12px 30px rgba(30, 58, 138, 0.05);
+            border: 1px solid #F1F5F9;
         }
 
         .curhat-textarea {
             width: 100%;
-            height: 250px;
+            height: 280px;
             border: none;
             outline: none;
             resize: none;
             font-size: 0.95rem;
-            line-height: 1.6;
-            color: var(--text-dark);
+            line-height: 1.7;
+            color: var(--text-main);
             background: transparent;
+            font-weight: 500;
         }
 
-        .curhat-textarea::placeholder {
-            color: #B2BEC3;
+        .curhat-textarea::placeholder { color: #CBD5E1; }
+
+        .footer-note {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid #F1F5F9;
         }
 
-        .char-count {
-            text-align: right;
-            font-size: 0.7rem;
-            color: var(--text-light);
-            margin-top: 10px;
-        }
-
-        /* Privacy Toggle */
-        .privacy-box {
+        .privacy-label {
             display: flex;
             align-items: center;
-            justify-content: space-between;
-            margin-top: 20px;
-            padding: 10px 5px;
+            gap: 6px;
+            font-size: 0.7rem;
+            color: var(--accent-safe);
+            font-weight: 700;
         }
 
-        .privacy-info { display: flex; align-items: center; gap: 8px; }
-        .privacy-info span { font-size: 0.8rem; font-weight: 500; color: var(--text-light); }
-
         /* Submit Button */
-        .btn-send {
+        .btn-submit {
             width: 100%;
-            padding: 16px;
-            background: var(--primary);
+            padding: 18px;
+            background: var(--primary-deep);
             color: white;
             border: none;
-            border-radius: 18px;
+            border-radius: 20px;
             font-size: 1rem;
-            font-weight: 700;
+            font-weight: 800;
             margin-top: 25px;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 10px;
-            box-shadow: 0 8px 20px rgba(74, 144, 226, 0.3);
+            gap: 12px;
+            box-shadow: 0 10px 25px rgba(30, 58, 138, 0.2);
             transition: 0.3s;
         }
 
-        .btn-send:active { transform: scale(0.96); opacity: 0.9; }
+        .btn-submit:active { transform: scale(0.96); }
 
         /* Bottom Nav */
         .bottom-nav {
-            position: fixed;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 100%;
-            max-width: 480px;
-            background: var(--white);
-            display: flex;
-            justify-content: space-around;
-            padding: 15px 10px 25px;
-            border-radius: 25px 25px 0 0;
-            box-shadow: 0 -10px 30px rgba(0,0,0,0.05);
+            position: fixed; bottom: 0; left: 50%; transform: translateX(-50%);
+            width: 100%; max-width: 480px;
+            background: var(--white); display: flex; justify-content: space-around;
+            padding: 15px 10px 30px; border-radius: 30px 30px 0 0;
+            box-shadow: 0 -10px 40px rgba(0,0,0,0.05); z-index: 100;
         }
-
         .nav-link {
-            text-decoration: none;
-            color: #B2BEC3;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            font-size: 0.65rem;
-            font-weight: 500;
-            gap: 5px;
+            text-decoration: none; color: #CBD5E1; display: flex;
+            flex-direction: column; align-items: center; gap: 6px; font-size: 0.65rem; font-weight: 700;
         }
-
-        .nav-link.active { color: var(--primary); }
+        .nav-link.active { color: var(--primary-deep); }
     </style>
 </head>
 <body>
 
     <header>
         <a href="index.html" class="back-btn">
-            <i data-lucide="chevron-left"></i>
+            <i data-lucide="chevron-left" size="20"></i>
         </a>
         <h1>Ruang Cerita</h1>
     </header>
 
     <div class="container">
-        <div class="mood-box">
+        <div class="mood-card">
             <p>Apa yang kamu rasakan saat ini?</p>
             <div class="mood-options">
                 <div class="mood-item" onclick="selectMood(this)">
@@ -226,21 +218,21 @@
             </div>
         </div>
 
-        <div class="input-card">
-            <textarea class="curhat-textarea" placeholder="Tuliskan apa pun yang ada di pikiranmu... Ruang ini sepenuhnya milikmu."></textarea>
-            <div class="char-count">Kesehatan mentalmu berharga ✨</div>
-        </div>
-
-        <div class="privacy-box">
-            <div class="privacy-info">
-                <i data-lucide="lock" size="16" color="#6FCF97"></i>
-                <span>Cerita ini bersifat pribadi & rahasia</span>
+        <div class="input-area">
+            <textarea class="curhat-textarea" placeholder="Tuliskan apa pun yang ada di pikiranmu... Ruang ini aman untukmu bercerita."></textarea>
+            
+            <div class="footer-note">
+                <div class="privacy-label">
+                    <i data-lucide="shield-check" size="14"></i>
+                    <span>Privasi Terjaga</span>
+                </div>
+                <span style="font-size: 0.65rem; color: var(--text-muted); font-weight: 600;">Kesehatan mentalmu berharga ✨</span>
             </div>
         </div>
 
-        <button class="btn-send" onclick="submitCurhat()">
-            Kirim Cerita
-            <i data-lucide="send" size="18"></i>
+        <button class="btn-submit" onclick="submitCurhat()">
+            Simpan Cerita
+            <i data-lucide="heart" size="18"></i>
         </button>
     </div>
 
@@ -250,12 +242,12 @@
             <span>Beranda</span>
         </a>
         <a href="curhat.html" class="nav-link active">
-            <i data-lucide="message-circle"></i>
+            <i data-lucide="message-square"></i>
             <span>Curhat</span>
         </a>
-        <a href="pantauriwayat.html" class="nav-link">
-            <i data-lucide="history"></i>
-            <span>Riwayat</span>
+        <a href="edukasi.html" class="nav-link">
+            <i data-lucide="book-open"></i>
+            <span>Edukasi</span>
         </a>
         <a href="profil.html" class="nav-link">
             <i data-lucide="user"></i>
@@ -276,10 +268,10 @@
         function submitCurhat() {
             const text = document.querySelector('.curhat-textarea').value;
             if(text.trim() === "") {
-                alert("Ceritakan sedikit apa yang kamu rasakan ya...");
+                alert("Jangan ragu, tuliskan sedikit apa yang kamu rasakan ya...");
                 return;
             }
-            alert("Terima kasih sudah bercerita. Menumpahkan perasaan adalah langkah hebat untuk merasa lebih baik.");
+            alert("Terima kasih sudah berani bercerita. Melepaskan beban pikiran adalah langkah awal yang luar biasa.");
             window.location.href = "pantauriwayat.html";
         }
     </script>
