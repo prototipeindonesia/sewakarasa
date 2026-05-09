@@ -4,265 +4,268 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Data Siswa - Sewaka Rasa</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/lucide@latest"></script>
     <style>
         :root {
-            --primary: #1E3A8A;
-            --bg: #F8FAFC;
+            /* Identitas Warna Sewaka Rasa */
+            --primary-deep: #1E3A8A;
+            --primary-soft: #3B82F6;
+            --accent-warning: #F59E0B;
+            --accent-safe: #10B981;
+            --danger-text: #EF4444;
+            --bg-calm: #F8FAFC;
             --white: #FFFFFF;
-            --text-dark: #1E293B;
-            --text-light: #64748B;
-            --success: #10B981;
-            --warning: #F59E0B;
-            --danger: #EF4444;
+            --text-main: #1E293B;
+            --text-muted: #64748B;
         }
 
         * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Inter', sans-serif;
+            margin: 0; padding: 0; box-sizing: border-box;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            -webkit-tap-highlight-color: transparent;
         }
 
         body {
-            background-color: var(--bg);
-            color: var(--text-dark);
+            background-color: var(--bg-calm);
+            color: var(--text-main);
             max-width: 480px;
             margin: 0 auto;
             min-height: 100vh;
             padding-bottom: 120px;
         }
 
+        /* Header & Search Area */
         header {
-            padding: 25px 20px;
+            padding: 30px 20px 20px;
             background: var(--white);
-            border-bottom: 1px solid #E2E8F0;
+            border-bottom: 1px solid #F1F5F9;
             position: sticky;
             top: 0;
             z-index: 100;
         }
 
-        header h1 { font-size: 1.1rem; font-weight: 700; margin-bottom: 15px; }
+        header h1 { font-size: 1.2rem; font-weight: 800; color: var(--primary-deep); margin-bottom: 18px; }
 
-        /* Search Bar */
-        .search-container {
+        .search-wrapper {
             position: relative;
             display: flex;
             align-items: center;
         }
 
-        .search-container i {
+        .search-wrapper i {
             position: absolute;
-            left: 12px;
-            color: #B2BEC3;
+            left: 15px;
+            color: #94A3B8;
         }
 
         .search-input {
             width: 100%;
-            padding: 12px 12px 12px 40px;
-            border-radius: 12px;
-            border: 1px solid #E2E8F0;
-            background: #F1F5F9;
+            padding: 14px 14px 14px 45px;
+            border-radius: 16px;
+            border: 1px solid #F1F5F9;
+            background: #F8FAFC;
             outline: none;
             font-size: 0.85rem;
+            font-weight: 500;
+            transition: 0.3s;
         }
 
-        .container { padding: 20px; }
+        .search-input:focus {
+            border-color: var(--primary-soft);
+            background: var(--white);
+            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.05);
+        }
 
-        /* Section Stats */
-        .class-filter {
+        .container { padding: 25px 20px; }
+
+        /* Chips Filter */
+        .filter-scroll {
             display: flex;
             gap: 10px;
-            margin-bottom: 20px;
+            margin-bottom: 25px;
             overflow-x: auto;
             scrollbar-width: none;
             padding-bottom: 5px;
         }
+        .filter-scroll::-webkit-scrollbar { display: none; }
 
-        .filter-chip {
-            padding: 6px 14px;
+        .chip {
+            padding: 8px 18px;
             background: var(--white);
-            border: 1px solid #E2E8F0;
-            border-radius: 10px;
+            border: 1px solid #F1F5F9;
+            border-radius: 14px;
             font-size: 0.75rem;
-            font-weight: 600;
-            color: var(--text-light);
-            white-space: nowrap;
-        }
-
-        .filter-chip.active {
-            background: var(--primary);
-            color: white;
-            border-color: var(--primary);
-        }
-
-        /* Student Card */
-        .student-card {
-            background: var(--white);
-            border-radius: 20px;
-            padding: 15px;
-            margin-bottom: 12px;
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.02);
-            border: 1px solid transparent;
-        }
-
-        .student-avatar {
-            width: 50px;
-            height: 50px;
-            background: #F1F5F9;
-            border-radius: 15px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--primary);
-        }
-
-        .student-info { flex: 1; }
-        .student-info h4 { font-size: 0.9rem; font-weight: 700; margin-bottom: 2px; }
-        .student-info p { font-size: 0.7rem; color: var(--text-light); }
-
-        .mood-status {
-            text-align: right;
-        }
-
-        .mood-dot {
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-            display: inline-block;
-            margin-bottom: 5px;
-        }
-
-        .status-text {
-            font-size: 0.65rem;
             font-weight: 700;
-            display: block;
+            color: var(--text-muted);
+            white-space: nowrap;
+            transition: 0.3s;
         }
 
-        /* Mood Colors */
-        .mood-stable { background: var(--success); color: var(--success); }
-        .mood-warning { background: var(--warning); color: var(--warning); }
-        .mood-critical { background: var(--danger); color: var(--danger); }
+        .chip.active {
+            background: var(--primary-deep);
+            color: white;
+            border-color: var(--primary-deep);
+            box-shadow: 0 5px 12px rgba(30, 58, 138, 0.2);
+        }
 
-        /* Floating Menu */
-        .floating-menu {
-            position: fixed;
-            bottom: 25px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 90%;
-            max-width: 420px;
-            background: var(--primary);
-            padding: 12px 10px;
+        /* Student List Card */
+        .student-item {
+            background: var(--white);
             border-radius: 24px;
+            padding: 18px;
+            margin-bottom: 15px;
             display: flex;
-            justify-content: space-around;
-            box-shadow: 0 15px 35px rgba(30, 58, 138, 0.4);
-            z-index: 100;
+            align-items: center;
+            gap: 16px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.02);
+            border: 1px solid #F1F5F9;
+            transition: 0.3s;
         }
 
-        .f-item { 
-            color: rgba(255,255,255,0.5); 
-            text-decoration: none; 
-            display: flex; 
-            flex-direction: column; 
-            align-items: center; 
-            gap: 4px; 
-            font-size: 0.65rem; 
-            font-weight: 500;
+        .student-item:active { transform: scale(0.97); }
+
+        .student-thumb {
+            width: 52px; height: 52px;
+            background: #EFF6FF;
+            border-radius: 16px;
+            display: flex; align-items: center; justify-content: center;
+            color: var(--primary-soft);
         }
 
-        .f-item.active { color: white; }
+        .student-content { flex: 1; }
+        .student-content h4 { font-size: 0.95rem; font-weight: 800; color: var(--text-main); margin-bottom: 4px; }
+        .student-content p { font-size: 0.7rem; color: var(--text-muted); font-weight: 600; }
+
+        .mood-indicator { text-align: right; }
+
+        .status-pill {
+            padding: 4px 10px;
+            border-radius: 10px;
+            font-size: 0.6rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            display: inline-block;
+        }
+
+        /* Status Colors */
+        .bg-stable { background: #F0FDF4; color: #16A34A; }
+        .bg-warning { background: #FFFBEB; color: #D97706; }
+        .bg-critical { background: #FFF1F2; color: #E11D48; }
+
+        .last-check {
+            font-size: 0.6rem;
+            color: #CBD5E1;
+            display: block;
+            margin-top: 5px;
+            font-weight: 700;
+        }
+
+        /* Floating Nav BK */
+        .floating-nav {
+            position: fixed; bottom: 25px; left: 50%;
+            transform: translateX(-50%); width: 90%; max-width: 420px;
+            background: var(--primary-deep);
+            padding: 14px 10px; border-radius: 26px;
+            display: flex; justify-content: space-around;
+            box-shadow: 0 15px 35px rgba(30, 58, 138, 0.3);
+            z-index: 1000;
+        }
+
+        .f-nav-link { 
+            color: rgba(255,255,255,0.4); text-decoration: none; 
+            display: flex; flex-direction: column; align-items: center; 
+            gap: 6px; font-size: 0.65rem; font-weight: 700; transition: 0.3s;
+        }
+
+        .f-nav-link.active { color: white; }
     </style>
 </head>
 <body>
 
     <header>
         <h1>Data & Kondisi Siswa</h1>
-        <div class="search-container">
+        <div class="search-wrapper">
             <i data-lucide="search" size="18"></i>
-            <input type="text" class="search-input" placeholder="Cari nama siswa atau NISN...">
+            <input type="text" class="search-input" placeholder="Cari nama, NISN, atau kelas...">
         </div>
     </header>
 
     <div class="container">
-        <div class="class-filter">
-            <div class="filter-chip active">Semua</div>
-            <div class="filter-chip">Kelas X</div>
-            <div class="filter-chip">Kelas XI</div>
-            <div class="filter-chip">Kelas XII</div>
-            <div class="filter-chip">IPA 1</div>
+        <div class="filter-scroll">
+            <div class="chip active">Semua Siswa</div>
+            <div class="chip">Kelas X</div>
+            <div class="chip">Kelas XI</div>
+            <div class="chip">Kelas XII</div>
+            <div class="chip">IPA 1</div>
+            <div class="chip">IPS 2</div>
         </div>
 
-        <div class="student-list">
-            <div class="student-card" onclick="location.href='profil-siswa-detail.html'">
-                <div class="student-avatar"><i data-lucide="user" size="24"></i></div>
-                <div class="student-info">
+        <div class="list-wrapper">
+            <div class="student-item" onclick="location.href='profil-siswa-detail.html'">
+                <div class="student-thumb"><i data-lucide="user-round" size="26"></i></div>
+                <div class="student-content">
                     <h4>Kadek Wijaya</h4>
-                    <p>NISN: 0045678910 • Kelas XI-A</p>
+                    <p>NISN: 0045678910 • XI-IPA 1</p>
                 </div>
-                <div class="mood-status">
-                    <span class="mood-dot mood-stable"></span>
-                    <span class="status-text" style="color: var(--success)">Stabil</span>
+                <div class="mood-indicator">
+                    <span class="status-pill bg-stable">Stabil</span>
+                    <span class="last-check">2 jam lalu</span>
                 </div>
             </div>
 
-            <div class="student-card">
-                <div class="student-avatar"><i data-lucide="user" size="24"></i></div>
-                <div class="student-info">
+            <div class="student-item">
+                <div class="student-thumb"><i data-lucide="user-round" size="26"></i></div>
+                <div class="student-content">
                     <h4>Siti Aminah</h4>
-                    <p>NISN: 0045678921 • Kelas X-B</p>
+                    <p>NISN: 0045678921 • X-B</p>
                 </div>
-                <div class="mood-status">
-                    <span class="mood-dot mood-warning"></span>
-                    <span class="status-text" style="color: var(--warning)">Cemas</span>
+                <div class="mood-indicator">
+                    <span class="status-pill bg-warning">Cemas</span>
+                    <span class="last-check">1 hari lalu</span>
                 </div>
             </div>
 
-            <div class="student-card">
-                <div class="student-avatar"><i data-lucide="user" size="24"></i></div>
-                <div class="student-info">
+            <div class="student-item">
+                <div class="student-thumb" style="background: #FFF1F2; color: #E11D48;"><i data-lucide="alert-circle" size="26"></i></div>
+                <div class="student-content">
                     <h4>Budi Santoso</h4>
-                    <p>NISN: 0045678955 • Kelas XII-C</p>
+                    <p>NISN: 0045678955 • XII-C</p>
                 </div>
-                <div class="mood-status">
-                    <span class="mood-dot mood-critical"></span>
-                    <span class="status-text" style="color: var(--danger)">Butuh Bantuan</span>
+                <div class="mood-indicator">
+                    <span class="status-pill bg-critical">Butuh Bantuan</span>
+                    <span class="last-check">Baru saja</span>
                 </div>
             </div>
 
-            <div class="student-card">
-                <div class="student-avatar"><i data-lucide="user" size="24"></i></div>
-                <div class="student-info">
+            <div class="student-item">
+                <div class="student-thumb"><i data-lucide="user-round" size="26"></i></div>
+                <div class="student-content">
                     <h4>Andi Saputra</h4>
-                    <p>NISN: 0045678977 • Kelas XI-A</p>
+                    <p>NISN: 0045678977 • XI-IPA 1</p>
                 </div>
-                <div class="mood-status">
-                    <span class="mood-dot mood-stable"></span>
-                    <span class="status-text" style="color: var(--success)">Stabil</span>
+                <div class="mood-indicator">
+                    <span class="status-pill bg-stable">Stabil</span>
+                    <span class="last-check">3 jam lalu</span>
                 </div>
             </div>
         </div>
     </div>
 
-    <nav class="floating-menu">
-        <a href="dashboardbk.html" class="f-item">
-            <i data-lucide="layout-grid" size="20"></i>
+    <nav class="floating-nav">
+        <a href="dashboardbk.html" class="f-nav-link">
+            <i data-lucide="layout-dashboard" size="20"></i>
             <span>Beranda</span>
         </a>
-        <a href="laporanbk.html" class="f-item">
-            <i data-lucide="file-warning" size="20"></i>
+        <a href="laporanbk.html" class="f-nav-link">
+            <i data-lucide="shield-alert" size="20"></i>
             <span>Laporan</span>
         </a>
-        <a href="datasiswa.html" class="f-item active">
-            <i data-lucide="users-2" size="20"></i>
+        <a href="datasiswa.html" class="f-nav-link active">
+            <i data-lucide="users" size="20"></i>
             <span>Siswa</span>
         </a>
-        <a href="login.html" class="f-item">
+        <a href="login.html" class="f-nav-link">
             <i data-lucide="log-out" size="20"></i>
             <span>Keluar</span>
         </a>
