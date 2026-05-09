@@ -3,335 +3,191 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sewaka Rasa - Sahabat Mental Siswa</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <title>Sewaka Rasa - Berani Bicara, Stop Bullying</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/lucide@latest"></script>
     <style>
         :root {
-            --primary: #4A90E2;      /* Biru tenang */
-            --secondary: #E3F2FD;    /* Biru sangat muda */
-            --accent: #6FCF97;       /* Hijau sukses/aman */
-            --danger: #EB5757;       /* Merah peringatan lembut */
-            --text-dark: #2D3436;
-            --text-light: #636E72;
-            --bg: #F0F7FF;           /* Background biru awan */
+            /* Warna Identitas Sewaka Rasa */
+            --primary-deep: #1E3A8A; 
+            --primary-soft: #3B82F6; 
+            --accent-safe: #10B981;  
+            --danger-soft: #FEE2E2;
+            --danger-text: #EF4444;
+            --bg-calm: #F8FAFC;
             --white: #FFFFFF;
+            --text-main: #1E293B;
+            --text-muted: #64748B;
         }
 
         * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Inter', sans-serif;
+            margin: 0; padding: 0; box-sizing: border-box;
+            font-family: 'Plus Jakarta Sans', sans-serif;
             -webkit-tap-highlight-color: transparent;
         }
 
         body {
-            background-color: var(--bg);
-            color: var(--text-dark);
-            max-width: 480px; /* Limit untuk simulasi mobile di desktop */
+            background-color: var(--bg-calm);
+            color: var(--text-main);
+            max-width: 480px;
             margin: 0 auto;
             min-height: 100vh;
-            padding-bottom: 100px; /* Jarak untuk navbar bawah */
+            padding-bottom: 110px;
         }
 
         /* Header */
         header {
-            padding: 30px 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+            padding: 40px 20px 30px;
+            background: linear-gradient(135deg, var(--primary-deep) 0%, var(--primary-soft) 100%);
+            border-bottom-left-radius: 40px;
+            border-bottom-right-radius: 40px;
+            color: white;
+            box-shadow: 0 10px 25px rgba(30, 58, 138, 0.15);
         }
 
-        .user-greeting h1 {
-            font-size: 1.25rem;
-            font-weight: 700;
-            color: var(--primary);
+        .header-top {
+            display: flex; justify-content: space-between; align-items: flex-start;
         }
 
-        .user-greeting p {
-            font-size: 0.85rem;
-            color: var(--text-light);
-            margin-top: 4px;
+        .user-greeting h1 { font-size: 1.4rem; font-weight: 800; }
+        .user-greeting p { font-size: 0.85rem; opacity: 0.9; margin-top: 4px; font-weight: 500; }
+        .tagline-small { font-size: 0.7rem; font-weight: 700; color: #FCD34D; text-transform: uppercase; letter-spacing: 1px; display: block; margin-bottom: 8px; }
+
+        .notif-badge {
+            background: rgba(255,255,255,0.2);
+            padding: 10px; border-radius: 15px; color: white; border: none;
         }
 
-        .notification-btn {
-            background: var(--white);
-            padding: 10px;
-            border-radius: 12px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-            color: var(--text-light);
-            cursor: pointer;
-            border: none;
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-        }
+        .container { padding: 0 20px; margin-top: -25px; }
 
-        /* Container Card */
-        .container {
-            padding: 0 20px;
-        }
-
+        /* Card System */
         .card {
             background: var(--white);
-            border-radius: 24px;
-            padding: 20px;
+            border-radius: 28px;
+            padding: 22px;
             margin-bottom: 20px;
-            box-shadow: 0 10px 25px rgba(74, 144, 226, 0.08);
+            box-shadow: 0 12px 30px rgba(0,0,0,0.04);
+            border: 1px solid rgba(226, 232, 240, 0.8);
         }
 
-        .card-title {
-            font-size: 0.95rem;
-            font-weight: 600;
-            margin-bottom: 15px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
+        .card-title { font-size: 0.95rem; font-weight: 800; margin-bottom: 18px; display: flex; justify-content: space-between; align-items: center; }
 
-        /* Emoji Check-in */
-        .emoji-row {
-            display: flex;
-            justify-content: space-around;
-            margin-top: 10px;
+        /* Mood Check-in */
+        .mood-grid { display: flex; justify-content: space-between; gap: 10px; }
+        .mood-item {
+            flex: 1; border: none; background: #F1F5F9; padding: 12px 5px; border-radius: 20px;
+            display: flex; flex-direction: column; align-items: center; gap: 8px; transition: 0.3s;
         }
-
-        .emoji-btn {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            border: none;
-            background: none;
-            cursor: pointer;
-            transition: 0.3s;
-        }
-
-        .emoji-btn:hover { transform: translateY(-5px); }
-
-        .emoji-icon {
-            font-size: 1.8rem;
-            width: 55px;
-            height: 55px;
-            background: var(--secondary);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 18px;
-            margin-bottom: 8px;
-        }
-
-        .emoji-btn span {
-            font-size: 0.7rem;
-            font-weight: 500;
-            color: var(--text-light);
-        }
-
-        /* Chart Simulation */
-        .chart-box {
-            display: flex;
-            align-items: flex-end;
-            justify-content: space-between;
-            height: 80px;
-            margin: 15px 0;
-            padding: 0 10px;
-            cursor: pointer;
-        }
-
-        .chart-bar {
-            width: 30px;
-            background: var(--secondary);
-            border-radius: 8px;
-            transition: 0.5s ease;
-        }
-
-        .chart-bar.active {
-            background: var(--primary);
-        }
+        .mood-item:active { transform: scale(0.9); background: var(--primary-soft); color: white; }
+        .mood-emoji { font-size: 1.5rem; }
+        .mood-label { font-size: 0.65rem; font-weight: 700; }
 
         /* Feature Grid */
-        .grid-menu {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 15px;
-        }
-
-        .menu-item {
-            background: var(--white);
-            padding: 20px;
-            border-radius: 20px;
-            text-decoration: none;
-            color: var(--text-dark);
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-            font-size: 0.85rem;
-            font-weight: 600;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.03);
-            border: 1px solid rgba(0,0,0,0.02);
-            transition: transform 0.2s;
-        }
-
-        .menu-item:active { transform: scale(0.95); }
-
-        .menu-item i {
-            color: var(--primary);
-        }
-
-        .menu-item.emergency {
-            background: #FFF0F0;
-            border: 1px solid #FFDCDC;
-        }
-
-        .menu-item.emergency i {
-            color: var(--danger);
-        }
-
-        /* Anti-Bullying Banner */
-        .banner {
-            background: linear-gradient(135deg, var(--accent), #56ab2f);
-            color: white;
-            padding: 20px;
-            border-radius: 20px;
-            margin-top: 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            text-decoration: none;
-        }
-
-        .banner-text h4 { font-size: 0.9rem; margin-bottom: 4px; }
-        .banner-text p { font-size: 0.75rem; opacity: 0.9; }
-
-        .banner-btn {
-            background: rgba(255,255,255,0.2);
-            border: 1px solid white;
-            color: white;
-            padding: 6px 12px;
-            border-radius: 10px;
-            font-size: 0.75rem;
-            pointer-events: none; /* Button mengikuti link banner */
-        }
-
-        /* Navigation */
-        .bottom-nav {
-            position: fixed;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 100%;
-            max-width: 480px;
-            background: var(--white);
-            display: flex;
-            justify-content: space-around;
-            padding: 15px 10px 25px;
-            border-radius: 25px 25px 0 0;
-            box-shadow: 0 -10px 30px rgba(0,0,0,0.05);
-            z-index: 100;
-        }
-
-        .nav-link {
-            text-decoration: none;
-            color: #B2BEC3;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            font-size: 0.65rem;
-            font-weight: 500;
-            gap: 5px;
+        .feature-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 20px; }
+        .feature-card {
+            background: var(--white); padding: 20px; border-radius: 24px;
+            text-decoration: none; color: var(--text-main);
+            display: flex; flex-direction: column; gap: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.02); border: 1px solid #F1F5F9;
             transition: 0.2s;
         }
+        .feature-card:active { transform: translateY(2px); background: #F8FAFC; }
+        .feature-card i { color: var(--primary-soft); }
+        .feature-card span { font-size: 0.85rem; font-weight: 700; }
 
-        .nav-link.active {
-            color: var(--primary);
+        /* Emergency & Highlighted */
+        .feature-card.emergency { background: #FFF1F2; border: 1px solid #FECDD3; }
+        .feature-card.emergency i { color: var(--danger-text); }
+        .feature-card.emergency p { font-size: 0.65rem; color: var(--text-muted); font-weight: 500; margin-top: -8px; }
+
+        /* Banner Edukasi */
+        .banner-edu {
+            background: linear-gradient(135deg, var(--accent-safe), #059669);
+            padding: 20px; border-radius: 24px; margin-top: 20px;
+            display: flex; align-items: center; gap: 15px; text-decoration: none; color: white;
         }
+        .banner-icon { background: rgba(255,255,255,0.2); padding: 12px; border-radius: 18px; }
+        .banner-info h4 { font-size: 0.9rem; font-weight: 800; }
+        .banner-info p { font-size: 0.75rem; opacity: 0.9; }
 
-        .nav-link i {
-            width: 24px;
-            height: 24px;
+        /* Navigasi Bawah */
+        .bottom-nav {
+            position: fixed; bottom: 0; left: 50%; transform: translateX(-50%);
+            width: 100%; max-width: 480px;
+            background: var(--white); display: flex; justify-content: space-around;
+            padding: 15px 10px 30px; border-radius: 30px 30px 0 0;
+            box-shadow: 0 -10px 40px rgba(0,0,0,0.05); z-index: 100;
         }
-
-        /* Utility */
-        .more { font-size: 0.75rem; color: var(--primary); text-decoration: none; }
+        .nav-link {
+            text-decoration: none; color: #CBD5E1; display: flex;
+            flex-direction: column; align-items: center; gap: 6px; font-size: 0.65rem; font-weight: 700;
+        }
+        .nav-link.active { color: var(--primary-deep); }
     </style>
 </head>
 <body>
 
     <header>
-        <div class="user-greeting">
-            <h1>Halo, Kadek! 👋</h1>
-            <p>Ruang aman untuk ceritamu hari ini.</p>
+        <div class="header-top">
+            <div class="user-greeting">
+                <span class="tagline-small">Berani Bicara, Stop Bullying</span>
+                <h1>Halo, Kadek! 👋</h1>
+                <p>Bagaimana kabarmu di sekolah hari ini?</p>
+            </div>
+            <button class="notif-badge"><i data-lucide="bell" size="20"></i></button>
         </div>
-        <a href="notifikasi.html" class="notification-btn">
-            <i data-lucide="bell"></i>
-        </a>
     </header>
 
     <div class="container">
         <section class="card">
-            <div class="card-title">Bagaimana perasaanmu?</div>
-            <div class="emoji-row">
-                <button class="emoji-btn" onclick="saveMood('Senang')">
-                    <div class="emoji-icon">😊</div>
-                    <span>Senang</span>
+            <div class="card-title">Check-in Perasaan</div>
+            <div class="mood-grid">
+                <button class="mood-item" onclick="recordMood('Senang')">
+                    <span class="mood-emoji">😊</span>
+                    <span class="mood-label">Senang</span>
                 </button>
-                <button class="emoji-btn" onclick="saveMood('Biasa')">
-                    <div class="emoji-icon">😐</div>
-                    <span>Biasa</span>
+                <button class="mood-item" onclick="recordMood('Biasa')">
+                    <span class="mood-emoji">😐</span>
+                    <span class="mood-label">Biasa</span>
                 </button>
-                <button class="emoji-btn" onclick="saveMood('Sedih')">
-                    <div class="emoji-icon">😔</div>
-                    <span>Sedih</span>
+                <button class="mood-item" onclick="recordMood('Cemas')">
+                    <span class="mood-emoji">😟</span>
+                    <span class="mood-label">Cemas</span>
                 </button>
-                <button class="emoji-btn" onclick="window.location.href='bantuandarurat.html'">
-                    <div class="emoji-icon" style="background: #FFE0E0;">🆘</div>
-                    <span>Krisis</span>
+                <button class="mood-item" onclick="location.href='bantuandarurat.html'">
+                    <span class="mood-emoji">🆘</span>
+                    <span class="mood-label">Krisis</span>
                 </button>
             </div>
         </section>
 
-        <section class="card">
-            <div class="card-title">
-                Riwayat Emosimu
-                <a href="pantauriwayat.html" class="more">Lihat Detail</a>
-            </div>
-            <div class="chart-box" onclick="window.location.href='pantauriwayat.html'">
-                <div class="chart-bar" style="height: 40%;"></div>
-                <div class="chart-bar" style="height: 70%;"></div>
-                <div class="chart-bar" style="height: 30%;"></div>
-                <div class="chart-bar" style="height: 85%;"></div>
-                <div class="chart-bar active" style="height: 60%;"></div>
-            </div>
-            <p style="font-size: 0.75rem; color: var(--text-light); text-align: center;">
-                "Grafikmu membaik hari ini. Terus semangat ya!"
-            </p>
-        </section>
-
-        <div class="grid-menu">
-            <a href="bantuandarurat.html" class="menu-item emergency">
-                <i data-lucide="phone-call"></i>
-                Bantuan Darurat
+        <div class="feature-grid">
+            <a href="bantuandarurat.html" class="feature-card emergency">
+                <i data-lucide="heart-pulse"></i>
+                <span>Bantuan Darurat</span>
+                <p>Layanan Hotline 24 Jam</p>
             </a>
-            <a href="peersupport.html" class="menu-item">
+            <a href="relawan.html" class="feature-card">
                 <i data-lucide="users"></i>
-                Peer Support
+                <span>Relawan Sebaya</span>
             </a>
-            <a href="caripsikolog.html" class="menu-item">
-                <i data-lucide="map-pin"></i>
-                Cari Psikolog
+            <a href="caripsikolog.html" class="feature-card">
+                <i data-lucide="search"></i>
+                <span>Cari Psikolog</span>
             </a>
-            <a href="relawan.html" class="menu-item">
-                <i data-lucide="heart-handshake"></i>
-                Relawan Denpasar
+            <a href="pantauriwayat.html" class="feature-card">
+                <i data-lucide="bar-chart-3"></i>
+                <span>Riwayat Mood</span>
             </a>
         </div>
 
-        <a href="edukasi.html" class="banner">
-            <div class="banner-text">
-                <h4>Edukasi Anti-Bullying</h4>
-                <p>Tahu hakmu dan cara bersuara.</p>
+        <a href="edukasi.html" class="banner-edu">
+            <div class="banner-icon"><i data-lucide="shield-check" size="28"></i></div>
+            <div class="banner-info">
+                <h4>Kenali & Lawan Bullying</h4>
+                <p>Pahami hakmu dan cara melapor aman.</p>
             </div>
-            <button class="banner-btn">Pelajari</button>
+            <i data-lucide="chevron-right" style="margin-left: auto;"></i>
         </a>
     </div>
 
@@ -341,12 +197,12 @@
             <span>Beranda</span>
         </a>
         <a href="curhat.html" class="nav-link">
-            <i data-lucide="message-circle"></i>
+            <i data-lucide="message-square"></i>
             <span>Curhat</span>
         </a>
-        <a href="pantauriwayat.html" class="nav-link">
-            <i data-lucide="history"></i>
-            <span>Riwayat</span>
+        <a href="edukasi.html" class="nav-link">
+            <i data-lucide="book-open"></i>
+            <span>Edukasi</span>
         </a>
         <a href="profil.html" class="nav-link">
             <i data-lucide="user"></i>
@@ -355,13 +211,10 @@
     </nav>
 
     <script>
-        // Inisialisasi icon Lucide
         lucide.createIcons();
 
-        // Fungsi interaksi mood
-        function saveMood(mood) {
-            alert(`Terima kasih sudah berbagi, Kadek. Perasaan ${mood} kamu sudah tersimpan di riwayat.`);
-            // Di sini Anda bisa menambahkan logika pengalihan atau penyimpanan database
+        function recordMood(mood) {
+            alert(`Terima kasih sudah jujur, Kadek. Perasaan "${mood}" kamu telah dicatat.`);
         }
     </script>
 </body>
