@@ -4,275 +4,240 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Peer Support - Sewaka Rasa</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/lucide@latest"></script>
     <style>
         :root {
-            --primary: #4A90E2;
-            --secondary: #E3F2FD;
-            --accent: #6FCF97;
-            --text-dark: #2D3436;
-            --text-light: #636E72;
-            --bg: #F0F7FF;
+            /* 14. Identitas Warna Baru */
+            --primary-deep: #1E3A8A;
+            --primary-soft: #3B82F6;
+            --accent-safe: #10B981;
+            --bg-calm: #F8FAFC;
             --white: #FFFFFF;
+            --text-dark: #1E293B;
+            --text-muted: #64748B;
         }
 
         * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Inter', sans-serif;
+            margin: 0; padding: 0; box-sizing: border-box;
+            font-family: 'Plus Jakarta Sans', sans-serif;
             -webkit-tap-highlight-color: transparent;
         }
 
         body {
-            background-color: var(--bg);
+            background-color: var(--bg-calm);
             color: var(--text-dark);
             max-width: 480px;
             margin: 0 auto;
             min-height: 100vh;
-            padding-bottom: 100px;
+            padding-bottom: 110px;
         }
 
+        /* 11. Header Konsisten */
         header {
-            padding: 25px 20px;
+            padding: 30px 20px;
+            background: linear-gradient(135deg, var(--primary-deep) 0%, var(--primary-soft) 100%);
+            border-bottom-left-radius: 35px;
+            border-bottom-right-radius: 35px;
+            color: white;
             display: flex;
             align-items: center;
             gap: 15px;
-            background: var(--white);
-            border-bottom-left-radius: 25px;
-            border-bottom-right-radius: 25px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+            box-shadow: 0 10px 25px rgba(30, 58, 138, 0.1);
         }
 
         .back-btn {
-            background: var(--secondary);
+            background: rgba(255,255,255,0.2);
             border: none;
             padding: 8px;
             border-radius: 12px;
-            color: var(--primary);
-            text-decoration: none;
+            color: white;
             display: flex;
+            text-decoration: none;
         }
 
-        header h1 { font-size: 1.1rem; font-weight: 700; }
+        header h1 { font-size: 1.2rem; font-weight: 800; }
 
-        .container { padding: 20px; }
+        .container { padding: 25px 20px; }
 
-        /* Hero Section */
+        /* 15. Hero Section Redesign */
         .hero-support {
-            background: linear-gradient(135deg, #6FCF97 0%, #4facfe 100%);
-            border-radius: 24px;
+            background: var(--white);
+            border-radius: 30px;
             padding: 25px;
-            color: white;
             margin-bottom: 25px;
             position: relative;
             overflow: hidden;
+            border: 1px solid rgba(226, 232, 240, 0.8);
+            box-shadow: 0 12px 30px rgba(0,0,0,0.03);
         }
 
-        .hero-support h2 { font-size: 1.2rem; margin-bottom: 8px; position: relative; z-index: 2; }
-        .hero-support p { font-size: 0.8rem; opacity: 0.9; line-height: 1.4; position: relative; z-index: 2; }
+        .hero-support h2 { font-size: 1.2rem; font-weight: 800; color: var(--primary-deep); margin-bottom: 8px; }
+        .hero-support p { font-size: 0.85rem; color: var(--text-muted); line-height: 1.5; }
         
-        .hero-support i.bg-icon {
-            position: absolute;
-            right: -10px;
-            bottom: -10px;
-            opacity: 0.2;
-            transform: rotate(-15deg);
+        .hero-badge {
+            background: #ECFDF5; color: var(--accent-safe);
+            padding: 6px 12px; border-radius: 10px;
+            font-size: 0.7rem; font-weight: 800; display: inline-block; margin-bottom: 12px;
         }
 
         /* Tabs */
-        .tab-container {
+        .tab-nav {
             display: flex;
-            gap: 10px;
-            margin-bottom: 20px;
+            background: #E2E8F0;
+            padding: 5px;
+            border-radius: 20px;
+            margin-bottom: 25px;
         }
 
-        .tab {
-            flex: 1;
-            padding: 10px;
-            border-radius: 12px;
-            border: none;
-            background: #E0EBF7;
-            color: var(--text-light);
-            font-size: 0.8rem;
-            font-weight: 600;
-            cursor: pointer;
+        .tab-btn {
+            flex: 1; padding: 12px; border: none; background: transparent;
+            font-size: 0.8rem; font-weight: 700; color: var(--text-muted);
+            cursor: pointer; border-radius: 15px; transition: 0.3s;
         }
 
-        .tab.active {
-            background: var(--primary);
-            color: white;
+        .tab-btn.active {
+            background: var(--white); color: var(--primary-deep);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
         }
 
-        /* Peer List */
-        .section-title {
-            font-size: 0.9rem;
-            font-weight: 700;
-            margin-bottom: 15px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
+        /* 13. Peer List */
+        .section-label {
+            font-size: 0.75rem; font-weight: 800; text-transform: uppercase;
+            letter-spacing: 1px; color: var(--primary-soft); margin-bottom: 15px;
+            display: flex; align-items: center; gap: 8px;
         }
 
         .peer-card {
             background: var(--white);
-            border-radius: 20px;
-            padding: 15px;
+            border-radius: 24px;
+            padding: 18px;
             display: flex;
             align-items: center;
             gap: 15px;
-            margin-bottom: 12px;
+            margin-bottom: 15px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.02);
-            transition: 0.2s;
+            border: 1px solid #F1F5F9;
+            transition: 0.3s;
         }
 
-        .peer-card:active { transform: scale(0.98); }
+        .peer-card:active { transform: scale(0.97); background: #F8FAFC; }
 
         .peer-avatar {
-            width: 50px;
-            height: 50px;
-            border-radius: 15px;
-            background: var(--secondary);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            color: var(--primary);
-            font-size: 1.2rem;
+            width: 55px; height: 55px; border-radius: 20px;
+            background: #EFF6FF; display: flex; align-items: center;
+            justify-content: center; font-weight: 800;
+            color: var(--primary-soft); font-size: 1.2rem;
+            border: 2px solid var(--white);
         }
 
         .peer-info { flex: 1; }
-        .peer-info h4 { font-size: 0.9rem; margin-bottom: 2px; }
-        .peer-info p { font-size: 0.7rem; color: var(--text-light); }
-        .status-badge {
-            font-size: 0.6rem;
-            padding: 2px 8px;
-            border-radius: 10px;
-            background: #E8F5E9;
-            color: #27AE60;
-            font-weight: 700;
+        .peer-info h4 { font-size: 0.95rem; font-weight: 700; display: flex; align-items: center; gap: 5px; }
+        .peer-info p { font-size: 0.75rem; color: var(--text-muted); margin-top: 2px; }
+        
+        .online-dot {
+            width: 8px; height: 8px; background: var(--accent-safe);
+            border-radius: 50%; display: inline-block;
         }
 
-        .chat-btn {
-            background: var(--secondary);
-            color: var(--primary);
-            border: none;
-            padding: 10px;
-            border-radius: 12px;
-            cursor: pointer;
+        .chat-action {
+            background: var(--primary-deep);
+            color: white; border: none; padding: 12px;
+            border-radius: 15px; cursor: pointer;
+            box-shadow: 0 4px 10px rgba(30, 58, 138, 0.2);
         }
 
-        /* Anonymous Forum Snippet */
-        .forum-card {
+        /* 18. Anonymous Forum Section */
+        .forum-item {
             background: var(--white);
-            border-radius: 20px;
-            padding: 15px;
-            margin-bottom: 12px;
-            border-left: 4px solid var(--accent);
+            border-radius: 24px;
+            padding: 20px;
+            margin-bottom: 15px;
+            border-left: 5px solid var(--primary-soft);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.02);
         }
 
-        .forum-card p { font-size: 0.8rem; line-height: 1.5; font-style: italic; color: var(--text-dark); }
-        .forum-footer {
-            margin-top: 10px;
-            display: flex;
-            justify-content: space-between;
-            font-size: 0.65rem;
-            color: var(--text-light);
+        .forum-content { font-size: 0.85rem; line-height: 1.6; color: var(--text-dark); font-weight: 500; }
+        .forum-meta {
+            margin-top: 12px; display: flex; justify-content: space-between;
+            font-size: 0.7rem; color: var(--text-muted); font-weight: 600;
         }
 
-        /* Nav */
+        /* Bottom Nav */
         .bottom-nav {
-            position: fixed;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 100%;
-            max-width: 480px;
-            background: var(--white);
-            display: flex;
-            justify-content: space-around;
-            padding: 15px 10px 25px;
-            border-radius: 25px 25px 0 0;
-            box-shadow: 0 -10px 30px rgba(0,0,0,0.05);
+            position: fixed; bottom: 0; left: 50%; transform: translateX(-50%);
+            width: 100%; max-width: 480px;
+            background: var(--white); display: flex; justify-content: space-around;
+            padding: 15px 10px 30px; border-radius: 30px 30px 0 0;
+            box-shadow: 0 -10px 40px rgba(0,0,0,0.05); z-index: 100;
         }
-
         .nav-link {
-            text-decoration: none;
-            color: #B2BEC3;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            font-size: 0.65rem;
-            font-weight: 500;
-            gap: 5px;
+            text-decoration: none; color: #CBD5E1; display: flex;
+            flex-direction: column; align-items: center; gap: 6px; font-size: 0.65rem; font-weight: 700;
         }
-
-        .nav-link.active { color: var(--primary); }
+        .nav-link.active { color: var(--primary-deep); }
     </style>
 </head>
 <body>
 
     <header>
         <a href="index.html" class="back-btn">
-            <i data-lucide="chevron-left"></i>
+            <i data-lucide="chevron-left" size="20"></i>
         </a>
         <h1>Peer Support</h1>
     </header>
 
     <div class="container">
         <div class="hero-support">
-            <i data-lucide="users" class="bg-icon" size="80"></i>
-            <h2>Kamu Punya Teman</h2>
-            <p>Ngobrol santai dengan teman sebaya yang siap mendengarkan ceritamu secara rahasia.</p>
+            <span class="hero-badge">Ruang Aman Sebaya</span>
+            <h2>Teman Mendengar</h2>
+            <p>Ngobrol santai dengan relawan sebaya yang telah dilatih untuk mendengarkan ceritamu tanpa menghakimi.</p>
         </div>
 
-        <div class="tab-container">
-            <button class="tab active">Teman Curhat</button>
-            <button class="tab">Cerita Anonim</button>
+        <div class="tab-nav">
+            <button class="tab-btn active">Relawan Sebaya</button>
+            <button class="tab-btn">Cerita Anonim</button>
         </div>
 
-        <div class="section-title">
-            <i data-lucide="message-circle-heart" size="18" color="#6FCF97"></i>
-            Tersedia Sekarang
-        </div>
-
-        <div class="peer-card">
-            <div class="peer-avatar">A</div>
-            <div class="peer-info">
-                <h4>Aditya <span class="status-badge">Online</span></h4>
-                <p>Kelas XII - Suka dengerin musik & diskusi.</p>
-            </div>
-            <button class="chat-btn"><i data-lucide="message-square"></i></button>
+        <div class="section-label">
+            <i data-lucide="zap" size="14"></i> Relawan Aktif (Denpasar)
         </div>
 
         <div class="peer-card">
-            <div class="peer-avatar" style="background:#F3E5F5; color:#9C27B0;">S</div>
+            <div class="peer-avatar">AD</div>
             <div class="peer-info">
-                <h4>Saras <span class="status-badge">Online</span></h4>
-                <p>Kelas XI - Pendengar yang baik, suka kucing.</p>
+                <h4>Aditya <span class="online-dot"></span></h4>
+                <p>Kelas XII • Pendengar Aktif • Musik & Seni</p>
             </div>
-            <button class="chat-btn"><i data-lucide="message-square"></i></button>
+            <button class="chat-action"><i data-lucide="message-circle" size="20"></i></button>
         </div>
 
-        <div class="section-title" style="margin-top: 25px;">
-            <i data-lucide="sparkles" size="18" color="#4A90E2"></i>
-            Ruang Cerita
+        <div class="peer-card">
+            <div class="peer-avatar" style="background:#FDF2F8; color:#DB2777;">SR</div>
+            <div class="peer-info">
+                <h4>Saras <span class="online-dot"></span></h4>
+                <p>Kelas XI • Peduli Kesehatan Mental</p>
+            </div>
+            <button class="chat-action"><i data-lucide="message-circle" size="20"></i></button>
         </div>
 
-        <div class="forum-card">
-            <p>"Hari ini aku berani bicara ke guru tentang perasaanku. Ternyata melegakan..."</p>
-            <div class="forum-footer">
-                <span>Oleh: Anonim</span>
-                <span>2 jam yang lalu</span>
+        <div class="section-label" style="margin-top: 30px;">
+            <i data-lucide="message-square-quote" size="14"></i> Ruang Berbagi
+        </div>
+
+        <div class="forum-item">
+            <p class="forum-content">"Dulu aku takut bicara kalau ada yang ganggu di kelas. Tapi setelah curhat di sini, aku jadi lebih berani lapor ke guru."</p>
+            <div class="forum-meta">
+                <span><i data-lucide="user-check" size="12" style="vertical-align: middle;"></i> Anonim</span>
+                <span>3 jam yang lalu</span>
             </div>
         </div>
 
-        <div class="forum-card">
-            <p>"Jangan menyerah ya buat kalian yang lagi ngerasa sendirian di sekolah. Kita bareng-bareng."</p>
-            <div class="forum-footer">
-                <span>Oleh: Anonim</span>
-                <span>5 jam yang lalu</span>
+        <div class="forum-item">
+            <p class="forum-content">"Ingat ya, kalian nggak sendirian. Masih banyak orang baik yang peduli sama kita di sekolah ini."</p>
+            <div class="forum-meta">
+                <span><i data-lucide="user-check" size="12" style="vertical-align: middle;"></i> Anonim</span>
+                <span>6 jam yang lalu</span>
             </div>
         </div>
     </div>
@@ -283,7 +248,7 @@
             <span>Beranda</span>
         </a>
         <a href="curhat.html" class="nav-link">
-            <i data-lucide="message-circle"></i>
+            <i data-lucide="message-square"></i>
             <span>Curhat</span>
         </a>
         <a href="pantauriwayat.html" class="nav-link">
@@ -298,6 +263,15 @@
 
     <script>
         lucide.createIcons();
+
+        // Toggle Tab (Simulasi)
+        const tabs = document.querySelectorAll('.tab-btn');
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                tabs.forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+            });
+        });
     </script>
 </body>
 </html>
