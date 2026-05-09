@@ -4,270 +4,273 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Relawan Denpasar - Sewaka Rasa</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/lucide@latest"></script>
     <style>
         :root {
-            --primary: #4A90E2;
-            --secondary: #E3F2FD;
-            --accent: #6FCF97;
+            /* Warna Identitas Sewaka Rasa */
+            --primary-deep: #1E3A8A;
+            --primary-soft: #3B82F6;
+            --accent-safe: #10B981;
+            --bg-calm: #F8FAFC;
             --white: #FFFFFF;
-            --text-dark: #2D3436;
-            --text-light: #636E72;
-            --bg: #F0F7FF;
+            --text-main: #1E293B;
+            --text-muted: #64748B;
         }
 
         * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Inter', sans-serif;
+            margin: 0; padding: 0; box-sizing: border-box;
+            font-family: 'Plus Jakarta Sans', sans-serif;
             -webkit-tap-highlight-color: transparent;
         }
 
         body {
-            background-color: var(--bg);
-            color: var(--text-dark);
+            background-color: var(--bg-calm);
+            color: var(--text-main);
             max-width: 480px;
             margin: 0 auto;
             min-height: 100vh;
-            padding-bottom: 100px;
+            padding-bottom: 110px;
         }
 
+        /* Header Konsisten */
         header {
-            padding: 25px 20px;
+            padding: 30px 20px;
+            background: linear-gradient(135deg, var(--primary-deep) 0%, var(--primary-soft) 100%);
+            border-bottom-left-radius: 35px;
+            border-bottom-right-radius: 35px;
+            color: white;
             display: flex;
             align-items: center;
             gap: 15px;
-            background: var(--white);
-            border-bottom-left-radius: 25px;
-            border-bottom-right-radius: 25px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+            box-shadow: 0 10px 25px rgba(30, 58, 138, 0.1);
         }
 
         .back-btn {
-            background: var(--secondary);
+            background: rgba(255,255,255,0.2);
             border: none;
             padding: 8px;
             border-radius: 12px;
-            color: var(--primary);
-            text-decoration: none;
+            color: white;
             display: flex;
+            text-decoration: none;
         }
 
-        header h1 { font-size: 1.1rem; font-weight: 700; }
+        header h1 { font-size: 1.2rem; font-weight: 800; }
 
-        .container { padding: 20px; }
+        .container { padding: 25px 20px; }
 
         /* Hero Section */
         .volunteer-hero {
-            background: linear-gradient(135deg, #FF9A9E 0%, #FAD0C4 100%);
-            border-radius: 24px;
+            background: var(--white);
+            border-radius: 30px;
             padding: 25px;
-            color: white;
             margin-bottom: 25px;
             text-align: center;
+            border: 1px solid rgba(226, 232, 240, 0.8);
+            box-shadow: 0 12px 30px rgba(0,0,0,0.03);
         }
 
-        .volunteer-hero h2 { font-size: 1.2rem; margin-bottom: 8px; }
-        .volunteer-hero p { font-size: 0.8rem; opacity: 0.95; line-height: 1.5; }
+        .hero-icon {
+            width: 60px; height: 60px; background: #ECFDF5;
+            color: var(--accent-safe); border-radius: 20px;
+            display: flex; align-items: center; justify-content: center;
+            margin: 0 auto 15px;
+        }
+
+        .volunteer-hero h2 { font-size: 1.3rem; font-weight: 800; color: var(--primary-deep); margin-bottom: 8px; }
+        .volunteer-hero p { font-size: 0.85rem; color: var(--text-muted); line-height: 1.6; }
 
         /* Community Cards */
         .section-label {
-            font-size: 0.85rem;
-            font-weight: 700;
-            color: var(--text-light);
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            margin-bottom: 15px;
-            display: block;
+            font-size: 0.75rem; font-weight: 800; text-transform: uppercase;
+            letter-spacing: 1px; color: var(--primary-soft); margin-bottom: 15px;
+            display: block; padding-left: 5px;
         }
 
         .community-card {
             background: var(--white);
-            border-radius: 20px;
-            padding: 20px;
-            margin-bottom: 15px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.02);
-            border: 1px solid rgba(0,0,0,0.01);
+            border-radius: 28px;
+            padding: 22px;
+            margin-bottom: 18px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.02);
+            border: 1px solid #F1F5F9;
         }
 
         .com-header {
             display: flex;
             align-items: center;
-            gap: 12px;
-            margin-bottom: 12px;
+            gap: 15px;
+            margin-bottom: 15px;
         }
 
         .com-logo {
-            width: 45px;
-            height: 45px;
-            background: var(--secondary);
-            border-radius: 12px;
+            width: 50px; height: 50px;
+            background: #EFF6FF;
+            border-radius: 15px;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: var(--primary);
+            color: var(--primary-soft);
         }
 
-        .com-title h3 { font-size: 0.95rem; }
-        .com-title p { font-size: 0.75rem; color: var(--text-light); }
+        .com-title h3 { font-size: 1rem; font-weight: 700; color: var(--text-main); }
+        .com-title p { font-size: 0.75rem; color: var(--text-muted); font-weight: 600; }
 
         .com-desc {
-            font-size: 0.8rem;
-            color: var(--text-dark);
-            line-height: 1.5;
-            margin-bottom: 15px;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            line-height: 1.6;
+            margin-bottom: 18px;
         }
 
         .com-tags {
             display: flex;
             gap: 8px;
             flex-wrap: wrap;
+            margin-bottom: 20px;
         }
 
         .tag {
-            background: #F1F2F6;
-            padding: 4px 10px;
-            border-radius: 8px;
-            font-size: 0.65rem;
-            color: var(--text-light);
-            font-weight: 500;
+            background: #F1F5F9;
+            padding: 5px 12px;
+            border-radius: 10px;
+            font-size: 0.7rem;
+            color: var(--primary-deep);
+            font-weight: 700;
         }
 
         .action-btns {
             display: flex;
-            gap: 10px;
-            margin-top: 20px;
+            gap: 12px;
+        }
+
+        .btn-action {
+            flex: 1;
+            padding: 12px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            text-decoration: none;
+            transition: 0.3s;
         }
 
         .btn-outline {
-            flex: 1;
-            padding: 10px;
-            border: 1px solid var(--primary);
-            border-radius: 12px;
-            background: transparent;
-            color: var(--primary);
-            font-size: 0.8rem;
-            font-weight: 600;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 5px;
-            text-decoration: none;
+            border: 1.5px solid #E2E8F0;
+            background: var(--white);
+            color: var(--text-main);
         }
 
         .btn-fill {
-            flex: 1;
-            padding: 10px;
-            background: var(--primary);
+            background: var(--primary-deep);
             border: none;
-            border-radius: 12px;
             color: white;
-            font-size: 0.8rem;
-            font-weight: 600;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 5px;
-            text-decoration: none;
+            box-shadow: 0 4px 12px rgba(30, 58, 138, 0.2);
         }
+
+        .btn-fill:active { transform: scale(0.96); }
+
+        /* Join Banner */
+        .join-banner {
+            background: #F1F5F9;
+            padding: 20px;
+            border-radius: 24px;
+            display: flex;
+            gap: 15px;
+            align-items: center;
+            border: 2px dashed #CBD5E1;
+            margin-top: 10px;
+        }
+
+        .join-banner p { font-size: 0.75rem; color: var(--text-muted); line-height: 1.5; font-weight: 600; }
+        .join-banner a { color: var(--primary-soft); text-decoration: none; font-weight: 800; }
 
         /* Bottom Nav */
         .bottom-nav {
-            position: fixed;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 100%;
-            max-width: 480px;
-            background: var(--white);
-            display: flex;
-            justify-content: space-around;
-            padding: 15px 10px 25px;
-            border-radius: 25px 25px 0 0;
-            box-shadow: 0 -10px 30px rgba(0,0,0,0.05);
+            position: fixed; bottom: 0; left: 50%; transform: translateX(-50%);
+            width: 100%; max-width: 480px;
+            background: var(--white); display: flex; justify-content: space-around;
+            padding: 15px 10px 30px; border-radius: 30px 30px 0 0;
+            box-shadow: 0 -10px 40px rgba(0,0,0,0.05); z-index: 100;
         }
-
         .nav-link {
-            text-decoration: none;
-            color: #B2BEC3;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            font-size: 0.65rem;
-            font-weight: 500;
-            gap: 5px;
+            text-decoration: none; color: #CBD5E1; display: flex;
+            flex-direction: column; align-items: center; gap: 6px; font-size: 0.65rem; font-weight: 700;
         }
-
-        .nav-link.active { color: var(--primary); }
+        .nav-link.active { color: var(--primary-deep); }
     </style>
 </head>
 <body>
 
     <header>
         <a href="index.html" class="back-btn">
-            <i data-lucide="chevron-left"></i>
+            <i data-lucide="chevron-left" size="20"></i>
         </a>
         <h1>Relawan Denpasar</h1>
     </header>
 
     <div class="container">
         <div class="volunteer-hero">
+            <div class="hero-icon">
+                <i data-lucide="heart" size="30"></i>
+            </div>
             <h2>Wadah Kepedulian</h2>
-            <p>Bersama komunitas lokal di Bali, kita ciptakan ruang sekolah yang aman dan bebas perundungan.</p>
+            <p>Berjejaring dengan komunitas lokal Bali untuk menciptakan lingkungan sekolah yang aman dan saling mendukung.</p>
         </div>
 
-        <span class="section-label">Komunitas Terdekat</span>
+        <span class="section-label">Komunitas Terverifikasi</span>
 
         <div class="community-card">
             <div class="com-header">
-                <div class="com-logo"><i data-lucide="heart-handshake"></i></div>
+                <div class="com-logo"><i data-lucide="hand-metal"></i></div>
                 <div class="com-title">
                     <h3>Bali Mental Health Care</h3>
                     <p>Denpasar Selatan</p>
                 </div>
             </div>
             <p class="com-desc">
-                Fokus pada pendampingan remaja yang mengalami trauma dan edukasi kesehatan mental di sekolah-sekolah area Bali.
+                Pendampingan khusus remaja dalam menghadapi tekanan sosial dan edukasi pencegahan bullying melalui pendekatan psikologis.
             </p>
             <div class="com-tags">
-                <span class="tag">#AntiBullying</span>
-                <span class="tag">#KonselingRemaja</span>
+                <span class="tag">Anti-Bullying</span>
+                <span class="tag">Kesehatan Mental</span>
             </div>
             <div class="action-btns">
-                <a href="#" class="btn-outline"><i data-lucide="instagram" size="16"></i> Profil</a>
-                <a href="https://wa.me/62812345678" class="btn-fill"><i data-lucide="message-circle" size="16"></i> Hubungi</a>
+                <a href="#" class="btn-action btn-outline"><i data-lucide="instagram" size="16"></i> Profil</a>
+                <a href="https://wa.me/62812345678" class="btn-action btn-fill"><i data-lucide="message-circle" size="16"></i> Hubungi</a>
             </div>
         </div>
 
         <div class="community-card">
             <div class="com-header">
-                <div class="com-logo" style="background: #E8F5E9; color: #2E7D32;"><i data-lucide="users"></i></div>
+                <div class="com-logo" style="background: #ECFDF5; color: var(--accent-safe);"><i data-lucide="users-2"></i></div>
                 <div class="com-title">
-                    <h3>Sahabat Sebaya Denpasar</h3>
+                    <h3>Sahabat Sebaya DPS</h3>
                     <p>Denpasar Utara</p>
                 </div>
             </div>
             <p class="com-desc">
-                Relawan dari kalangan mahasiswa psikologi yang siap menjadi pendengar setia untuk keluhan bullying.
+                Komunitas relawan mahasiswa yang siap menjadi teman bicara dan pendengar setia untuk setiap keluh kesahmu di sekolah.
             </p>
             <div class="com-tags">
-                <span class="tag">#PeerGroup</span>
-                <span class="tag">#CurhatAman</span>
+                <span class="tag">Peer Support</span>
+                <span class="tag">Curhat Aman</span>
             </div>
             <div class="action-btns">
-                <a href="#" class="btn-outline"><i data-lucide="globe" size="16"></i> Web</a>
-                <a href="https://wa.me/62812345679" class="btn-fill"><i data-lucide="message-circle" size="16"></i> Hubungi</a>
+                <a href="#" class="btn-action btn-outline"><i data-lucide="globe" size="16"></i> Web</a>
+                <a href="https://wa.me/62812345679" class="btn-action btn-fill"><i data-lucide="message-circle" size="16"></i> Hubungi</a>
             </div>
         </div>
 
-        <div style="background: var(--white); padding: 15px; border-radius: 18px; display: flex; gap: 12px; align-items: center; border: 1px dashed var(--primary); margin-top: 10px;">
-            <i data-lucide="info" color="var(--primary)"></i>
-            <p style="font-size: 0.75rem; color: var(--text-light);">
-                Ingin bergabung menjadi relawan atau mendaftarkan komunitasmu? <a href="#" style="color: var(--primary); font-weight: 700; text-decoration: none;">Klik di sini</a>.
+        <div class="join-banner">
+            <i data-lucide="info" size="24" style="color: var(--primary-soft); flex-shrink: 0;"></i>
+            <p>
+                Ingin mendaftarkan komunitasmu atau bergabung menjadi relawan? <a href="#">Daftar di sini</a>.
             </p>
         </div>
     </div>
@@ -278,12 +281,12 @@
             <span>Beranda</span>
         </a>
         <a href="curhat.html" class="nav-link">
-            <i data-lucide="message-circle"></i>
+            <i data-lucide="message-square"></i>
             <span>Curhat</span>
         </a>
-        <a href="pantauriwayat.html" class="nav-link">
-            <i data-lucide="history"></i>
-            <span>Riwayat</span>
+        <a href="edukasi.html" class="nav-link">
+            <i data-lucide="book-open"></i>
+            <span>Edukasi</span>
         </a>
         <a href="profil.html" class="nav-link">
             <i data-lucide="user"></i>
