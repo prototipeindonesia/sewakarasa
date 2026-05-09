@@ -4,269 +4,252 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cari Psikolog - Sewaka Rasa</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/lucide@latest"></script>
     <style>
         :root {
-            --primary: #4A90E2;
-            --secondary: #E3F2FD;
-            --accent: #6FCF97;
-            --text-dark: #2D3436;
-            --text-light: #636E72;
-            --bg: #F0F7FF;
+            /* 14. Identitas Warna Baru */
+            --primary-deep: #1E3A8A;
+            --primary-soft: #3B82F6;
+            --accent-safe: #10B981;
+            --bg-calm: #F8FAFC;
             --white: #FFFFFF;
+            --text-dark: #1E293B;
+            --text-muted: #64748B;
         }
 
         * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Inter', sans-serif;
+            margin: 0; padding: 0; box-sizing: border-box;
+            font-family: 'Plus Jakarta Sans', sans-serif;
             -webkit-tap-highlight-color: transparent;
         }
 
         body {
-            background-color: var(--bg);
+            background-color: var(--bg-calm);
             color: var(--text-dark);
             max-width: 480px;
             margin: 0 auto;
             min-height: 100vh;
-            padding-bottom: 100px;
+            padding-bottom: 110px;
         }
 
+        /* 11. Header Konsisten */
         header {
-            padding: 25px 20px;
+            padding: 30px 20px;
+            background: linear-gradient(135deg, var(--primary-deep) 0%, var(--primary-soft) 100%);
+            border-bottom-left-radius: 35px;
+            border-bottom-right-radius: 35px;
+            color: white;
             display: flex;
             align-items: center;
             gap: 15px;
-            background: var(--white);
-            border-bottom-left-radius: 25px;
-            border-bottom-right-radius: 25px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+            box-shadow: 0 10px 25px rgba(30, 58, 138, 0.1);
         }
 
         .back-btn {
-            background: var(--secondary);
+            background: rgba(255,255,255,0.2);
             border: none;
             padding: 8px;
             border-radius: 12px;
-            color: var(--primary);
-            text-decoration: none;
+            color: white;
             display: flex;
+            text-decoration: none;
         }
 
-        header h1 { font-size: 1.1rem; font-weight: 700; }
+        header h1 { font-size: 1.2rem; font-weight: 800; }
 
-        .container { padding: 20px; }
+        .container { padding: 25px 20px; }
 
-        /* Search Bar */
-        .search-container {
+        /* Search Bar Modern */
+        .search-box {
             position: relative;
-            margin-bottom: 20px;
+            margin-bottom: 25px;
         }
 
         .search-input {
             width: 100%;
-            padding: 15px 15px 15px 45px;
-            border-radius: 18px;
-            border: 1px solid #E0EBF7;
+            padding: 18px 20px 18px 55px;
+            border-radius: 20px;
+            border: 1px solid #E2E8F0;
             background: var(--white);
             font-size: 0.9rem;
+            font-weight: 500;
             outline: none;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.02);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.02);
+            transition: 0.3s;
         }
 
+        .search-input:focus { border-color: var(--primary-soft); box-shadow: 0 4px 20px rgba(59, 130, 246, 0.1); }
+
         .search-icon {
-            position: absolute;
-            left: 15px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: var(--text-light);
+            position: absolute; left: 20px; top: 50%;
+            transform: translateY(-50%); color: var(--text-muted);
         }
 
         /* Filter Chips */
-        .filter-scroll {
-            display: flex;
-            gap: 10px;
-            overflow-x: auto;
-            padding-bottom: 10px;
-            margin-bottom: 20px;
+        .filter-wrapper {
+            display: flex; gap: 10px; overflow-x: auto;
+            padding-bottom: 15px; margin-bottom: 15px;
             scrollbar-width: none;
         }
 
         .filter-chip {
-            white-space: nowrap;
-            padding: 8px 16px;
-            background: #E0EBF7;
-            border-radius: 12px;
-            font-size: 0.75rem;
-            font-weight: 600;
-            color: var(--primary);
-            cursor: pointer;
+            white-space: nowrap; padding: 10px 18px;
+            background: #E2E8F0; border-radius: 15px;
+            font-size: 0.75rem; font-weight: 700;
+            color: var(--text-muted); cursor: pointer; transition: 0.3s;
         }
 
         .filter-chip.active {
-            background: var(--primary);
-            color: white;
+            background: var(--primary-deep); color: white;
+            box-shadow: 0 4px 12px rgba(30, 58, 138, 0.2);
         }
 
-        /* Psychologist Card */
-        .psikolog-card {
+        /* 13. Ahli Card Redesign */
+        .expert-card {
             background: var(--white);
-            border-radius: 20px;
-            padding: 18px;
-            margin-bottom: 15px;
-            display: flex;
-            gap: 15px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.02);
-            border: 1px solid rgba(0,0,0,0.02);
+            border-radius: 28px;
+            padding: 22px;
+            margin-bottom: 18px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.02);
+            border: 1px solid #F1F5F9;
+            transition: 0.3s;
         }
 
-        .doc-image {
-            width: 70px;
-            height: 70px;
-            border-radius: 15px;
-            object-fit: cover;
-            background: var(--secondary);
+        .expert-header { display: flex; gap: 18px; margin-bottom: 20px; }
+
+        .expert-image {
+            width: 80px; height: 80px; border-radius: 22px;
+            background: #EFF6FF; display: flex; align-items: center;
+            justify-content: center; flex-shrink: 0;
+            border: 2px solid #F8FAFC;
         }
 
-        .doc-info { flex: 1; }
-        .doc-info h3 { font-size: 0.95rem; margin-bottom: 4px; }
-        .doc-info .specialty { font-size: 0.75rem; color: var(--primary); font-weight: 600; margin-bottom: 8px; display: block; }
+        .expert-details { flex: 1; }
+        .expert-details h3 { font-size: 1rem; font-weight: 800; color: var(--text-dark); margin-bottom: 4px; }
+        .specialty-tag {
+            font-size: 0.75rem; color: var(--primary-soft);
+            font-weight: 700; margin-bottom: 10px; display: block;
+        }
         
-        .doc-meta {
-            display: flex;
-            gap: 12px;
-            font-size: 0.7rem;
-            color: var(--text-light);
+        .expert-meta { display: flex; flex-wrap: wrap; gap: 12px; font-size: 0.7rem; color: var(--text-muted); font-weight: 600; }
+        .expert-meta span { display: flex; align-items: center; gap: 5px; }
+
+        .btn-schedule {
+            width: 100%; padding: 14px;
+            background: var(--primary-deep); color: white;
+            border: none; border-radius: 18px;
+            font-weight: 700; font-size: 0.85rem;
+            cursor: pointer; transition: 0.3s;
+            display: flex; align-items: center; justify-content: center; gap: 8px;
         }
 
-        .doc-meta span { display: flex; align-items: center; gap: 4px; }
+        .btn-schedule:active { transform: scale(0.97); }
 
-        .btn-booking {
-            margin-top: 15px;
-            width: 100%;
-            padding: 10px;
-            background: var(--primary);
-            color: white;
-            border: none;
-            border-radius: 12px;
-            font-weight: 600;
-            font-size: 0.8rem;
-            cursor: pointer;
-            transition: 0.2s;
+        .availability {
+            font-size: 0.65rem; color: var(--accent-safe);
+            font-weight: 800; display: block; margin-top: 8px;
         }
 
-        .btn-booking:active { transform: scale(0.98); }
-
-        /* Navigation Bawah */
+        /* Bottom Nav */
         .bottom-nav {
-            position: fixed;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 100%;
-            max-width: 480px;
-            background: var(--white);
-            display: flex;
-            justify-content: space-around;
-            padding: 15px 10px 25px;
-            border-radius: 25px 25px 0 0;
-            box-shadow: 0 -10px 30px rgba(0,0,0,0.05);
+            position: fixed; bottom: 0; left: 50%; transform: translateX(-50%);
+            width: 100%; max-width: 480px;
+            background: var(--white); display: flex; justify-content: space-around;
+            padding: 15px 10px 30px; border-radius: 30px 30px 0 0;
+            box-shadow: 0 -10px 40px rgba(0,0,0,0.05); z-index: 100;
         }
-
         .nav-link {
-            text-decoration: none;
-            color: #B2BEC3;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            font-size: 0.65rem;
-            font-weight: 500;
-            gap: 5px;
+            text-decoration: none; color: #CBD5E1; display: flex;
+            flex-direction: column; align-items: center; gap: 6px; font-size: 0.65rem; font-weight: 700;
         }
-
-        .nav-link.active { color: var(--primary); }
+        .nav-link.active { color: var(--primary-deep); }
     </style>
 </head>
 <body>
 
     <header>
         <a href="index.html" class="back-btn">
-            <i data-lucide="chevron-left"></i>
+            <i data-lucide="chevron-left" size="20"></i>
         </a>
         <h1>Cari Tenaga Ahli</h1>
     </header>
 
     <div class="container">
-        <div class="search-container">
-            <i data-lucide="search" class="search-icon" size="18"></i>
-            <input type="text" class="search-input" placeholder="Cari nama atau spesialisasi...">
+        <div class="search-box">
+            <i data-lucide="search" class="search-icon" size="20"></i>
+            <input type="text" class="search-input" placeholder="Cari nama, keahlian, atau lokasi...">
         </div>
 
-        <div class="filter-scroll">
+        <div class="filter-wrapper">
             <div class="filter-chip active">Semua</div>
             <div class="filter-chip">Denpasar Timur</div>
             <div class="filter-chip">Denpasar Barat</div>
-            <div class="filter-chip">Klinik Remaja</div>
             <div class="filter-chip">Online</div>
+            <div class="filter-chip">Sore Hari</div>
         </div>
 
-        <div class="psikolog-card">
-            <div class="doc-info">
-                <div style="display: flex; gap: 15px;">
-                    <div class="doc-image" style="display: flex; align-items: center; justify-content: center; background: #e1f5fe;">
-                        <i data-lucide="user" color="#039be5"></i>
-                    </div>
-                    <div>
-                        <h3>Saraswati, M.Psi</h3>
-                        <span class="specialty">Psikolog Klinis Anak & Remaja</span>
-                        <div class="doc-meta">
-                            <span><i data-lucide="map-pin" size="14"></i> Denpasar Timur</span>
-                            <span><i data-lucide="star" size="14" fill="#F2C94C" color="#F2C94C"></i> 4.9</span>
-                        </div>
-                    </div>
+        <div class="expert-card">
+            <div class="expert-header">
+                <div class="expert-image">
+                    <i data-lucide="user-round" size="35" color="var(--primary-soft)"></i>
                 </div>
-                <button class="btn-booking" onclick="alert('Menghubungkan ke sistem janji temu...')">Buat Janji Temu</button>
+                <div class="expert-details">
+                    <h3>Saraswati, M.Psi</h3>
+                    <span class="specialty-tag">Psikolog Klinis Anak & Remaja</span>
+                    <div class="expert-meta">
+                        <span><i data-lucide="map-pin" size="14"></i> Denpasar Timur</span>
+                        <span><i data-lucide="star" size="14" fill="#FBBF24" color="#FBBF24"></i> 4.9 (120+)</span>
+                    </div>
+                    <span class="availability">● Tersedia Hari Ini</span>
+                </div>
             </div>
+            <button class="btn-schedule" onclick="window.location.href='booking.html'">
+                <i data-lucide="calendar-plus" size="18"></i>
+                Buat Janji Temu
+            </button>
         </div>
 
-        <div class="psikolog-card">
-            <div class="doc-info">
-                <div style="display: flex; gap: 15px;">
-                    <div class="doc-image" style="display: flex; align-items: center; justify-content: center; background: #f3e5f5;">
-                        <i data-lucide="user" color="#8e24aa"></i>
-                    </div>
-                    <div>
-                        <h3>Dr. Putu Agus</h3>
-                        <span class="specialty">Spesialis Kesehatan Mental</span>
-                        <div class="doc-meta">
-                            <span><i data-lucide="map-pin" size="14"></i> Denpasar Barat</span>
-                            <span><i data-lucide="star" size="14" fill="#F2C94C" color="#F2C94C"></i> 4.8</span>
-                        </div>
-                    </div>
+        <div class="expert-card">
+            <div class="expert-header">
+                <div class="expert-image" style="background: #FFF7ED;">
+                    <i data-lucide="user-round" size="35" color="#F97316"></i>
                 </div>
-                <button class="btn-booking" onclick="alert('Menghubungkan ke sistem janji temu...')">Buat Janji Temu</button>
+                <div class="expert-details">
+                    <h3>Dr. Putu Agus</h3>
+                    <span class="specialty-tag">Spesialis Kesehatan Mental</span>
+                    <div class="expert-meta">
+                        <span><i data-lucide="map-pin" size="14"></i> Denpasar Barat</span>
+                        <span><i data-lucide="star" size="14" fill="#FBBF24" color="#FBBF24"></i> 4.8 (85+)</span>
+                    </div>
+                    <span class="availability" style="color: var(--text-muted);">○ Tersedia Besok</span>
+                </div>
             </div>
+            <button class="btn-schedule" style="background: #F1F5F9; color: var(--primary-deep); box-shadow: none;">
+                <i data-lucide="calendar-plus" size="18"></i>
+                Buat Janji Temu
+            </button>
         </div>
 
-        <div class="psikolog-card">
-            <div class="doc-info">
-                <div style="display: flex; gap: 15px;">
-                    <div class="doc-image" style="display: flex; align-items: center; justify-content: center; background: #e8f5e9;">
-                        <i data-lucide="user" color="#2e7d32"></i>
-                    </div>
-                    <div>
-                        <h3>Ni Luh Made, S.Psi</h3>
-                        <span class="specialty">Konselor Pendidikan</span>
-                        <div class="doc-meta">
-                            <span><i data-lucide="map-pin" size="14"></i> Online / Video Call</span>
-                            <span><i data-lucide="star" size="14" fill="#F2C94C" color="#F2C94C"></i> 5.0</span>
-                        </div>
-                    </div>
+        <div class="expert-card">
+            <div class="expert-header">
+                <div class="expert-image" style="background: #F0FDF4;">
+                    <i data-lucide="user-round" size="35" color="var(--accent-safe)"></i>
                 </div>
-                <button class="btn-booking" onclick="alert('Menghubungkan ke sistem janji temu...')">Buat Janji Temu</button>
+                <div class="expert-details">
+                    <h3>Ni Luh Made, S.Psi</h3>
+                    <span class="specialty-tag">Konselor Pendidikan</span>
+                    <div class="expert-meta">
+                        <span><i data-lucide="video" size="14"></i> Online / Video Call</span>
+                        <span><i data-lucide="star" size="14" fill="#FBBF24" color="#FBBF24"></i> 5.0 (50+)</span>
+                    </div>
+                    <span class="availability">● Tersedia Sekarang</span>
+                </div>
             </div>
+            <button class="btn-schedule">
+                <i data-lucide="calendar-plus" size="18"></i>
+                Buat Janji Temu
+            </button>
         </div>
 
     </div>
@@ -277,12 +260,12 @@
             <span>Beranda</span>
         </a>
         <a href="curhat.html" class="nav-link">
-            <i data-lucide="message-circle"></i>
+            <i data-lucide="message-square"></i>
             <span>Curhat</span>
         </a>
-        <a href="pantauriwayat.html" class="nav-link">
-            <i data-lucide="history"></i>
-            <span>Riwayat</span>
+        <a href="edukasi.html" class="nav-link">
+            <i data-lucide="book-open"></i>
+            <span>Edukasi</span>
         </a>
         <a href="profil.html" class="nav-link">
             <i data-lucide="user"></i>
@@ -292,6 +275,15 @@
 
     <script>
         lucide.createIcons();
+
+        // Toggle Chips
+        const chips = document.querySelectorAll('.filter-chip');
+        chips.forEach(chip => {
+            chip.addEventListener('click', () => {
+                chips.forEach(c => c.classList.remove('active'));
+                chip.classList.add('active');
+            });
+        });
     </script>
 </body>
 </html>
